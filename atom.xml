@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://WU-hrq.github.io/"/>
-  <updated>2018-05-24T06:16:19.741Z</updated>
+  <updated>2018-05-24T07:35:37.650Z</updated>
   <id>https://WU-hrq.github.io/</id>
   
   <author>
@@ -17,13 +17,39 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>Github博客绑定个性域名</title>
-    <link href="https://WU-hrq.github.io/2018/05/23/hello-world/"/>
-    <id>https://WU-hrq.github.io/2018/05/23/hello-world/</id>
-    <published>2018-05-23T08:17:20.862Z</published>
-    <updated>2018-05-24T06:16:19.741Z</updated>
+    <title>30万知乎用户数据爬虫分析</title>
+    <link href="https://WU-hrq.github.io/2018/05/24/zhihu_pachong/"/>
+    <id>https://WU-hrq.github.io/2018/05/24/zhihu_pachong/</id>
+    <published>2018-05-24T07:03:32.699Z</published>
+    <updated>2018-05-24T07:35:37.650Z</updated>
     
-    <content type="html"><![CDATA[<blockquote><p>首先我们先买个域名,可以在<a href="https://cn.aliyun.com/" target="_blank" rel="noopener">阿里云</a>购买域名，买完之后登陆阿里云管理控制台,然后点击域名，再点击解析如下。</p></blockquote> <a id="more"></a><h2 id="域名解析"><a href="#域名解析" class="headerlink" title="域名解析"></a>域名解析</h2><p><img src="http://upload-images.jianshu.io/upload_images/5308475-4953432e1dae183e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="阿里云管理控制台"></p><p>接下来点击添加解析，并输入以下信息（记录值不一样，第一个的记录值填你的github访问地址,如wu-hrq.github.io,第二个填的是你的网站的ip地址，比如我原来的网站是wu-hrq.github.io,那么就查找wu-hrq.github.io的ip地址，网站的ip地址可以在这查<a href="http://ip.chinaz.com/" target="_blank" rel="noopener">ip地址</a>。</p><p><img src="http://upload-images.jianshu.io/upload_images/5308475-8b27bab6a8c389d2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="ip地址"></p><p>然后向你的 Github Pages 仓库添加一个CNAME(一定要大写)文件，在CNAME里面添加你的域名信息（不加http://），如shenzekun.cn,并上传到你的GitHub中</p><p>填完之后登陆你博客的github，点击setting<br><img src="http://upload-images.jianshu.io/upload_images/5308475-d73094344c7c7f6f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="setting"></p><p>在这填写你的域名，点击保存即可<br><img src="http://upload-images.jianshu.io/upload_images/5308475-86c99fdf87c8fef8.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="域名"></p><p>接下来就是等了，我的博客大概半个小时就可以看到了。😝</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span>(<span class="literal">true</span>)&#123;</span><br><span class="line">    System.out.println(<span class="string">"博主水平有限，有问题欢迎指出😝，讨论或私信都OK."</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+    <content type="html"><![CDATA[<blockquote><p>爬取知乎30万用户信息（去重后），并从爬取数据的各维度进行分析，探索知乎用户群体的一些规律。</p></blockquote> <a id="more"></a><hr><h2 id="重点"><a href="#重点" class="headerlink" title="重点"></a>重点</h2><ul><li>采用MongoDB存储数据</li><li>为应对单个ip爬取被封的情况，采用代理ip池进行爬虫</li><li>为提高爬取速度，采用多线程进行爬取（采用python语言）</li><li>为提高用户质量，只爬取用户的关注列表</li><li>图表展示采用<a href="https://me.bdp.cn/home.html" target="_blank" rel="noopener">BDP</a>，一款云端可视化数据分析工具</li></ul><h2 id="用户分析"><a href="#用户分析" class="headerlink" title="用户分析"></a>用户分析</h2><blockquote><p>本分析不具有代表性,只针对已爬取的30万数据</p></blockquote><p>展示图表如下：</p><ul><li><p>知乎用户性别对比<br><img src="/images/知乎用户性别对比.png" alt="知乎用户性别对比">可以看出知乎用户群体中男性占比最大，女性其次，还有一部分用户性别未知，难道有其他性别？</p></li><li><p>知乎用户粉丝数量排名<br><img src="/images/知乎用户粉丝数量排名.png" alt="知乎用户粉丝数量排名">张公子领跑粉丝数量排行榜，粉丝数量超过150多万。丁香医生、李开复粉丝数量也超过100万大关，轮子哥排名也非常靠前。</p></li><li><p>知乎用户获得感谢数量排名<br><img src="/images/知乎用户获得感谢数量排名.png" alt="知乎用户获得感谢数量排名">张公子继续领跑感谢数量排行榜</p></li><li><p>知乎用户获赞数量排名<br><img src="/images/知乎用户获赞数量排名.png" alt="知乎用户获赞数量排名">张公子还是领跑获赞数量排行榜，快突破500万大关了。</p></li><li><p>知乎用户行业分布<br><img src="/images/知乎用户行业分布.png" alt="知乎用户行业分布">从知乎用户行业分布中可以看出，IT行业牢牢占据榜首，教育、金融、法律和医学等领域排名也很靠前。</p></li><li><p>知乎用户院校分布<br><img src="/images/知乎用户院校分布.png" alt="知乎用户院校分布">知乎用户就读院校Top10清一色985，不是清北真是不好意思往上写。</p></li><li><p>知乎用户现居地分布<br><img src="/images/知乎用户现居地分布.png" alt="知乎用户现居地分布">从知乎用户居住地可以看出，知乎用户主要活跃在北上广深等一线城市。</p></li><li><p>知乎用户个人简介词频统计<br><img src="/images/知乎用户个人简介词频统计.png" alt="知乎用户个人简介词频统计">从知乎用户个人简介词频统计可以看出，知乎的用户群体学生占比比较大。</p></li><li><p>知乎用户个性签名词频统计<br><img src="/images/知乎用户个性签名词频统计.png" alt="知乎用户个性签名词频统计">从知乎用户个性签名词频统计可以看出，用户倾向在个性签名中填写职业相关的信息。</p></li></ul><h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ul><li>爬取的用户数量不是很大，没有很强的代表性；</li><li>可以进一步进行用户相关性分析；</li><li>欢迎交流，求个star；</li></ul><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span>(<span class="literal">true</span>)&#123;</span><br><span class="line">    System.out.println(<span class="string">"博主水平有限，有问题欢迎指出😝，讨论或私信都OK."</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      &lt;blockquote&gt;
+&lt;p&gt;爬取知乎30万用户信息（去重后），并从爬取数据的各维度进行分析，探索知乎用户群体的一些规律。&lt;/p&gt;
+&lt;/blockquote&gt;
+    
+    </summary>
+    
+      <category term="爬虫" scheme="https://WU-hrq.github.io/categories/%E7%88%AC%E8%99%AB/"/>
+    
+    
+      <category term="爬虫" scheme="https://WU-hrq.github.io/tags/%E7%88%AC%E8%99%AB/"/>
+    
+      <category term="知乎" scheme="https://WU-hrq.github.io/tags/%E7%9F%A5%E4%B9%8E/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Github博客绑定个性域名</title>
+    <link href="https://WU-hrq.github.io/2018/05/23/github_domain/"/>
+    <id>https://WU-hrq.github.io/2018/05/23/github_domain/</id>
+    <published>2018-05-23T08:17:20.862Z</published>
+    <updated>2018-05-24T07:41:47.143Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote><p>首先我们先买个域名,可以在<a href="https://cn.aliyun.com/" target="_blank" rel="noopener">阿里云</a>购买域名，买完之后登陆阿里云管理控制台,然后点击域名，再点击解析如下。</p></blockquote> <a id="more"></a><hr><h2 id="域名解析"><a href="#域名解析" class="headerlink" title="域名解析"></a>域名解析</h2><p><img src="http://upload-images.jianshu.io/upload_images/5308475-4953432e1dae183e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="阿里云管理控制台"></p><p>接下来点击添加解析，并输入以下信息（记录值不一样，第一个的记录值填你的github访问地址,如wu-hrq.github.io,第二个填的是你的网站的ip地址，比如我原来的网站是wu-hrq.github.io,那么就查找wu-hrq.github.io的ip地址，网站的ip地址可以在这查<a href="http://ip.chinaz.com/" target="_blank" rel="noopener">ip地址</a>。</p><p><img src="http://upload-images.jianshu.io/upload_images/5308475-8b27bab6a8c389d2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="ip地址"></p><p>然后向你的 Github Pages 仓库添加一个CNAME(一定要大写)文件，在CNAME里面添加你的域名信息（不加http://），如shenzekun.cn,并上传到你的GitHub中</p><p>填完之后登陆你博客的github，点击setting<br><img src="http://upload-images.jianshu.io/upload_images/5308475-d73094344c7c7f6f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="setting"></p><p>在这填写你的域名，点击保存即可<br><img src="http://upload-images.jianshu.io/upload_images/5308475-86c99fdf87c8fef8.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="域名"></p><p>接下来就是等了，我的博客大概半个小时就可以看到了。😝</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span>(<span class="literal">true</span>)&#123;</span><br><span class="line">    System.out.println(<span class="string">"博主水平有限，有问题欢迎指出😝，讨论或私信都OK."</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
     
     <summary type="html">
     

@@ -129,7 +129,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="爬虫,知乎," />
 
 
 
@@ -142,16 +142,20 @@
 
 
 
-<meta name="description" content="临渊羡鱼，不如退而结网">
-<meta property="og:type" content="website">
-<meta property="og:title" content="程序猿QQ的个人博客">
-<meta property="og:url" content="https://WU-hrq.github.io/tags/域名/index.html">
+<meta name="description" content="爬取知乎30万用户信息（去重后），并从爬取数据的各维度进行分析，探索知乎用户群体的一些规律。">
+<meta name="keywords" content="爬虫,知乎">
+<meta property="og:type" content="article">
+<meta property="og:title" content="30万知乎用户数据爬虫分析">
+<meta property="og:url" content="https://WU-hrq.github.io/2018/05/24/zhihu_pachong/index.html">
 <meta property="og:site_name" content="程序猿QQ的个人博客">
-<meta property="og:description" content="临渊羡鱼，不如退而结网">
+<meta property="og:description" content="爬取知乎30万用户信息（去重后），并从爬取数据的各维度进行分析，探索知乎用户群体的一些规律。">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527153592200&di=ce36bca2ca9515d93bb31b4bb4d8f70e&imgtype=0&src=http%3A%2F%2Fupload.chinaz.com%2F2015%2F0727%2F1437958514279.jpg">
+<meta property="og:updated_time" content="2018-05-24T07:35:37.650Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="程序猿QQ的个人博客">
-<meta name="twitter:description" content="临渊羡鱼，不如退而结网">
+<meta name="twitter:title" content="30万知乎用户数据爬虫分析">
+<meta name="twitter:description" content="爬取知乎30万用户信息（去重后），并从爬取数据的各维度进行分析，探索知乎用户群体的一些规律。">
+<meta name="twitter:image" content="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527153592200&di=ce36bca2ca9515d93bb31b4bb4d8f70e&imgtype=0&src=http%3A%2F%2Fupload.chinaz.com%2F2015%2F0727%2F1437958514279.jpg">
 
 
 
@@ -181,13 +185,13 @@
 
 
 
-  <link rel="canonical" href="https://WU-hrq.github.io/tags/域名/"/>
+  <link rel="canonical" href="https://WU-hrq.github.io/2018/05/24/zhihu_pachong/"/>
 
 
 
 
 
-  <title>标签: 域名 | 程序猿QQ的个人博客</title>
+  <title>30万知乎用户数据爬虫分析 | 程序猿QQ的个人博客</title>
   
 
 
@@ -206,7 +210,7 @@
     
   
 
-  <div class="container sidebar-position-left ">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 	<a href="https://github.com/WU-hrq" class="github-corner" aria-label="View source on Github"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
 
@@ -335,54 +339,343 @@
           <div id="content" class="content">
             
 
-  
-  
-  
-  <div class="post-block tag">
+  <div id="posts" class="posts-expand">
+    
 
-    <div id="posts" class="posts-collapse">
-      <div class="collection-title">
-        <h1>域名<small>标签</small>
-        </h1>
-      </div>
+  
 
-      
-        
+  
+  
+  
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://WU-hrq.github.io/2018/05/24/zhihu_pachong/">
 
-      <h2 class="post-title">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="程序猿QQ">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/user2.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="程序猿QQ的个人博客">
+    </span>
+
+    
+      <header class="post-header">
+
         
-            <a class="post-title-link" href="/2018/05/23/github_domain/" itemprop="url">
-              
-                <span itemprop="name">Github博客绑定个性域名</span>
-              
-            </a>
         
-      </h2>
+          <h1 class="post-title" itemprop="name headline">30万知乎用户数据爬虫分析</h1>
+        
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-05-23T16:17:20+08:00"
-              content="2018-05-23" >
-          05-23
-        </time>
-      </div>
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-24T15:03:32+08:00">
+                2018-05-24
+              </time>
+            
 
-    </header>
-  </article>
+            
 
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/爬虫/" itemprop="url" rel="index">
+                    <span itemprop="name">爬虫</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  606
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  2
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+        <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
+          
+          
+            <div class="post-gallery-row">
+              <a class="post-gallery-img fancybox"
+                 href="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527153592200&di=ce36bca2ca9515d93bb31b4bb4d8f70e&imgtype=0&src=http%3A%2F%2Fupload.chinaz.com%2F2015%2F0727%2F1437958514279.jpg" rel="gallery_cjhk6ypxu0001nkctb7lywsg4"
+                 itemscope itemtype="http://schema.org/ImageObject" itemprop="url">
+                <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527153592200&di=ce36bca2ca9515d93bb31b4bb4d8f70e&imgtype=0&src=http%3A%2F%2Fupload.chinaz.com%2F2015%2F0727%2F1437958514279.jpg" itemprop="contentUrl"/>
+              </a>
+            
+          
+
+          
+          </div>
+        </div>
+      
+
+      
+        <blockquote>
+<p>爬取知乎30万用户信息（去重后），并从爬取数据的各维度进行分析，探索知乎用户群体的一些规律。</p>
+</blockquote>
+ <a id="more"></a>
+<hr>
+<h2 id="重点"><a href="#重点" class="headerlink" title="重点"></a>重点</h2><ul>
+<li>采用MongoDB存储数据</li>
+<li>为应对单个ip爬取被封的情况，采用代理ip池进行爬虫</li>
+<li>为提高爬取速度，采用多线程进行爬取（采用python语言）</li>
+<li>为提高用户质量，只爬取用户的关注列表</li>
+<li>图表展示采用<a href="https://me.bdp.cn/home.html" target="_blank" rel="noopener">BDP</a>，一款云端可视化数据分析工具</li>
+</ul>
+<h2 id="用户分析"><a href="#用户分析" class="headerlink" title="用户分析"></a>用户分析</h2><blockquote>
+<p>本分析不具有代表性,只针对已爬取的30万数据</p>
+</blockquote>
+<p>展示图表如下：</p>
+<ul>
+<li><p>知乎用户性别对比<br><img src="/images/知乎用户性别对比.png" alt="知乎用户性别对比">可以看出知乎用户群体中男性占比最大，女性其次，还有一部分用户性别未知，难道有其他性别？</p>
+</li>
+<li><p>知乎用户粉丝数量排名<br><img src="/images/知乎用户粉丝数量排名.png" alt="知乎用户粉丝数量排名">张公子领跑粉丝数量排行榜，粉丝数量超过150多万。丁香医生、李开复粉丝数量也超过100万大关，轮子哥排名也非常靠前。</p>
+</li>
+<li><p>知乎用户获得感谢数量排名<br><img src="/images/知乎用户获得感谢数量排名.png" alt="知乎用户获得感谢数量排名">张公子继续领跑感谢数量排行榜</p>
+</li>
+<li><p>知乎用户获赞数量排名<br><img src="/images/知乎用户获赞数量排名.png" alt="知乎用户获赞数量排名">张公子还是领跑获赞数量排行榜，快突破500万大关了。</p>
+</li>
+<li><p>知乎用户行业分布<br><img src="/images/知乎用户行业分布.png" alt="知乎用户行业分布">从知乎用户行业分布中可以看出，IT行业牢牢占据榜首，教育、金融、法律和医学等领域排名也很靠前。</p>
+</li>
+<li><p>知乎用户院校分布<br><img src="/images/知乎用户院校分布.png" alt="知乎用户院校分布">知乎用户就读院校Top10清一色985，不是清北真是不好意思往上写。</p>
+</li>
+<li><p>知乎用户现居地分布<br><img src="/images/知乎用户现居地分布.png" alt="知乎用户现居地分布">从知乎用户居住地可以看出，知乎用户主要活跃在北上广深等一线城市。</p>
+</li>
+<li><p>知乎用户个人简介词频统计<br><img src="/images/知乎用户个人简介词频统计.png" alt="知乎用户个人简介词频统计">从知乎用户个人简介词频统计可以看出，知乎的用户群体学生占比比较大。</p>
+</li>
+<li><p>知乎用户个性签名词频统计<br><img src="/images/知乎用户个性签名词频统计.png" alt="知乎用户个性签名词频统计">从知乎用户个性签名词频统计可以看出，用户倾向在个性签名中填写职业相关的信息。</p>
+</li>
+</ul>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ul>
+<li>爬取的用户数量不是很大，没有很强的代表性；</li>
+<li>可以进一步进行用户相关性分析；</li>
+<li>欢迎交流，求个star；</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span>(<span class="literal">true</span>)&#123;</span><br><span class="line">    System.out.println(<span class="string">"博主水平有限，有问题欢迎指出😝，讨论或私信都OK."</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+    
+    
+
+	<div>
+      
+      <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+      
+    </div>
+	
+	<div>
+      
+        
+<div class="my_post_copyright">
+  <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+
+  <!-- JS库 sweetalert 可修改路径 -->
+  <script src="https://cdn.bootcss.com/jquery/2.0.0/jquery.min.js"></script>
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  <p><span>本文标题:</span><a href="/2018/05/24/zhihu_pachong/">30万知乎用户数据爬虫分析</a></p>
+  <p><span>文章作者:</span><a href="/" title="访问 程序猿QQ 的个人博客">程序猿QQ</a></p>
+  <p><span>发布时间:</span>2018年05月24日 - 15:05</p>
+  <p><span>最后更新:</span>2018年05月24日 - 15:05</p>
+  <p><span>原始链接:</span><a href="/2018/05/24/zhihu_pachong/" title="30万知乎用户数据爬虫分析">https://WU-hrq.github.io/2018/05/24/zhihu_pachong/</a>
+    <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="https://WU-hrq.github.io/2018/05/24/zhihu_pachong/"  aria-label="复制成功！"></i></span>
+  </p>
+  <p><span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">非商业性使用</a> 转载请保留原文链接及作者。</p>  
+</div>
+<script> 
+    var clipboard = new Clipboard('.fa-clipboard');
+      $(".fa-clipboard").click(function(){
+      clipboard.on('success', function(){
+        swal({   
+          title: "",   
+          text: '复制成功',
+          icon: "success", 
+          showConfirmButton: true
+          });
+        });
+    });  
+</script>
 
       
     </div>
 
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="程序猿QQ 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/爬虫/" rel="tag"># 爬虫</a>
+          
+            <a href="/tags/知乎/" rel="tag"># 知乎</a>
+          
+        </div>
+      
+
+      
+      
+        <div class="post-widgets">
+        
+
+        
+
+        
+          
+          <div id="needsharebutton-postbottom">
+            <span class="btn">
+              <i class="fa fa-share-alt" aria-hidden="true"></i>
+            </span>
+          </div>
+        
+        </div>
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/05/23/github_domain/" rel="next" title="Github博客绑定个性域名">
+                <i class="fa fa-chevron-left"></i> Github博客绑定个性域名
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -390,6 +683,15 @@
 
 
           
+
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8zNjczNy8xMzI3Mg"></div>
+    </div>
+
+  
+
+
 
         </div>
         
@@ -410,8 +712,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -524,6 +835,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#重点"><span class="nav-number">1.</span> <span class="nav-text">重点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#用户分析"><span class="nav-number">2.</span> <span class="nav-text">用户分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">3.</span> <span class="nav-text">总结</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -677,6 +1004,10 @@
   
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 
@@ -705,6 +1036,17 @@
 
 
 
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
   
 
 
