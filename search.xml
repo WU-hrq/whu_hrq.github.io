@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title><![CDATA[你好]]></title>
+    <title><![CDATA[Github博客绑定个性域名]]></title>
     <url>%2F2018%2F05%2F23%2Fhello-world%2F</url>
-    <content type="text"><![CDATA[Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick StartCreate a new post1$ hexo new "My New Post" More info: Writing Run server1$ hexo server More info: Server Generate static files1$ hexo generate More info: Generating Deploy to remote sites1$ hexo deploy More info: Deployment]]></content>
+    <content type="text"><![CDATA[首先我们先买个域名,可以在阿里云购买域名，买完之后登陆阿里云管理控制台,然后点击域名，再点击解析如下。 域名解析 接下来点击添加解析，并输入以下信息（记录值不一样，第一个的记录值填你的github访问地址,如wu-hrq.github.io,第二个填的是你的网站的ip地址，比如我原来的网站是wu-hrq.github.io,那么就查找wu-hrq.github.io的ip地址，网站的ip地址可以在这查ip地址。 然后向你的 Github Pages 仓库添加一个CNAME(一定要大写)文件，在CNAME里面添加你的域名信息（不加http://），如shenzekun.cn,并上传到你的GitHub中 填完之后登陆你博客的github，点击setting 在这填写你的域名，点击保存即可 接下来就是等了，我的博客大概半个小时就可以看到了。😝 123while(true)&#123; System.out.println("博主水平有限，有问题欢迎指出😝，讨论或私信都OK.");&#125;]]></content>
       <categories>
-        <category>Diary</category>
+        <category>Github</category>
       </categories>
       <tags>
-        <tag>Ps</tag>
-        <tag>game</tag>
+        <tag>博客</tag>
+        <tag>域名</tag>
+        <tag>Github</tag>
       </tags>
   </entry>
 </search>
