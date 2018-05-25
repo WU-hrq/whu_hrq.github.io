@@ -150,12 +150,20 @@
 <meta property="og:site_name" content="程序猿QQ的个人博客">
 <meta property="og:description" content="爬取知乎30万用户信息（去重后），并从爬取数据的各维度进行分析，探索知乎用户群体的一些规律。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527153592200&di=ce36bca2ca9515d93bb31b4bb4d8f70e&imgtype=0&src=http%3A%2F%2Fupload.chinaz.com%2F2015%2F0727%2F1437958514279.jpg">
-<meta property="og:updated_time" content="2018-05-24T07:35:37.650Z">
+<meta property="og:image" content="https://wu-hrq.github.io/images/知乎用户性别对比.png">
+<meta property="og:image" content="https://wu-hrq.github.io/images/知乎用户粉丝数量排名.png">
+<meta property="og:image" content="https://wu-hrq.github.io/images/知乎用户获得感谢数量排名.png">
+<meta property="og:image" content="https://wu-hrq.github.io/images/知乎用户获赞数量排名.png">
+<meta property="og:image" content="https://wu-hrq.github.io/images/知乎用户行业分布.png">
+<meta property="og:image" content="https://wu-hrq.github.io/images/知乎用户院校分布.png">
+<meta property="og:image" content="https://wu-hrq.github.io/images/知乎用户现居地分布.png">
+<meta property="og:image" content="https://wu-hrq.github.io/images/知乎用户个人简介词频统计.png">
+<meta property="og:image" content="https://wu-hrq.github.io/images/知乎用户个性签名词频统计.png">
+<meta property="og:updated_time" content="2018-05-25T03:35:34.328Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="30万知乎用户数据爬虫分析">
 <meta name="twitter:description" content="爬取知乎30万用户信息（去重后），并从爬取数据的各维度进行分析，探索知乎用户群体的一些规律。">
-<meta name="twitter:image" content="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527153592200&di=ce36bca2ca9515d93bb31b4bb4d8f70e&imgtype=0&src=http%3A%2F%2Fupload.chinaz.com%2F2015%2F0727%2F1437958514279.jpg">
+<meta name="twitter:image" content="https://wu-hrq.github.io/images/知乎用户性别对比.png">
 
 
 
@@ -165,7 +173,7 @@
     root: '/',
     scheme: 'Mist',
     version: '5.1.4',
-    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":true},
     fancybox: true,
     tabs: true,
     motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
@@ -424,6 +432,11 @@
           
 
           
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"> 阅读次数</i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
 
           
             <div class="post-wordcount">
@@ -470,22 +483,6 @@
     <div class="post-body" itemprop="articleBody">
 
       
-      
-        <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
-          
-          
-            <div class="post-gallery-row">
-              <a class="post-gallery-img fancybox"
-                 href="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527153592200&di=ce36bca2ca9515d93bb31b4bb4d8f70e&imgtype=0&src=http%3A%2F%2Fupload.chinaz.com%2F2015%2F0727%2F1437958514279.jpg" rel="gallery_cjhkippww0007hoctu167q2fv"
-                 itemscope itemtype="http://schema.org/ImageObject" itemprop="url">
-                <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527153592200&di=ce36bca2ca9515d93bb31b4bb4d8f70e&imgtype=0&src=http%3A%2F%2Fupload.chinaz.com%2F2015%2F0727%2F1437958514279.jpg" itemprop="contentUrl"/>
-              </a>
-            
-          
-
-          
-          </div>
-        </div>
       
 
       
@@ -560,7 +557,7 @@
   <p><span>本文标题:</span><a href="/2018/05/24/zhihu_pachong/">30万知乎用户数据爬虫分析</a></p>
   <p><span>文章作者:</span><a href="/" title="访问 程序猿QQ 的个人博客">程序猿QQ</a></p>
   <p><span>发布时间:</span>2018年05月24日 - 15:05</p>
-  <p><span>最后更新:</span>2018年05月24日 - 15:05</p>
+  <p><span>最后更新:</span>2018年05月25日 - 11:05</p>
   <p><span>原始链接:</span><a href="/2018/05/24/zhihu_pachong/" title="30万知乎用户数据爬虫分析">https://WU-hrq.github.io/2018/05/24/zhihu_pachong/</a>
     <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="https://WU-hrq.github.io/2018/05/24/zhihu_pachong/"  aria-label="复制成功！"></i></span>
   </p>
@@ -617,9 +614,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/爬虫/" rel="tag"># 爬虫</a>
+            <a href="/tags/爬虫/" rel="tag"><i class="fa fa-tag"></i> 爬虫</a>
           
-            <a href="/tags/知乎/" rel="tag"># 知乎</a>
+            <a href="/tags/知乎/" rel="tag"><i class="fa fa-tag"></i> 知乎</a>
           
         </div>
       
@@ -706,6 +703,8 @@
   </div>
 
   <aside id="sidebar" class="sidebar">
+    
+      <div id="sidebar-dimmer"></div>
     
     <div class="sidebar-inner">
 
@@ -865,21 +864,15 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-<div class="copyright">&copy; 2017 &mdash; <span itemprop="copyrightYear">2018</span>
-  <span class="with-love">
-    <i class="fa fa-user"></i>
+        <div class="copyright">&copy; 2017 &mdash; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love" id="heart">
+    <i class="fa fa-heart"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">程序猿QQ</span>
 
   
 </div>
 
-<div class="powered-by">
-<i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">
-  本站访客数:<span id="busuanzi_value_site_uv"></span>
-</span>
-</div>
 
 <!--
   <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
@@ -895,13 +888,42 @@
 -->
 
 
-
+<!--
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count"> | 博客全站共876字</span>
+  <span class="post-count">博客全站共876字</span>
+</div>
+-->
+
+<div class="weixin-box">
+  <div class="weixin-menu">
+    <div class="weixin-hover">
+      <div class="weixin-description">微信扫一扫，订阅本博客</div>
+    </div>
+  </div>
 </div>
 
         
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"> 访问人数</i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"> 总访问量</i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
+  
+</div>
+
 
 
 
@@ -916,6 +938,8 @@
     
       <div class="back-to-top">
         <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
         
       </div>
     
