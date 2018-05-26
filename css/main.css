@@ -2127,7 +2127,7 @@ img:hover {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #30ff28;
+  background: #4b4fff;
 }
 .links-of-blogroll {
   font-size: 13px;
@@ -3450,6 +3450,12 @@ a.fancybox {
 }
 .btn:hover {
   color: #222 !important;
+}
+* {
+  cursor: url("http://om8u46rmb.bkt.clouddn.com/sword2.ico"), auto !important;
+}
+:active {
+  cursor: url("http://om8u46rmb.bkt.clouddn.com/sword1.ico"), auto !important;
 }
 @-moz-keyframes heartAnimate {
   0%, 100% {
