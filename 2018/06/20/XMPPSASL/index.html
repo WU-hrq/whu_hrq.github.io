@@ -129,7 +129,7 @@
 
 
 
-  <meta name="keywords" content="爬虫,知乎," />
+  <meta name="keywords" content="XMPP,SASL," />
 
 
 
@@ -142,28 +142,18 @@
 
 
 
-<meta name="description" content="爬取知乎30万用户信息（去重后），并从爬取数据的各维度进行分析，探索知乎用户群体的一些规律。">
-<meta name="keywords" content="爬虫,知乎">
+<meta name="description" content="XMPP协议SASL认证流程—以openfire服务器为例">
+<meta name="keywords" content="XMPP,SASL">
 <meta property="og:type" content="article">
-<meta property="og:title" content="30万知乎用户数据爬虫分析">
-<meta property="og:url" content="https://WU-hrq.github.io/2018/05/26/zhihu-pachong/index.html">
+<meta property="og:title" content="XMPP协议SASL认证流程">
+<meta property="og:url" content="https://WU-hrq.github.io/2018/06/20/XMPPSASL/index.html">
 <meta property="og:site_name" content="程序猿QQ的个人博客">
-<meta property="og:description" content="爬取知乎30万用户信息（去重后），并从爬取数据的各维度进行分析，探索知乎用户群体的一些规律。">
+<meta property="og:description" content="XMPP协议SASL认证流程—以openfire服务器为例">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://wu-hrq.github.io/images/知乎用户性别对比.png">
-<meta property="og:image" content="https://wu-hrq.github.io/images/知乎用户粉丝数量排名.png">
-<meta property="og:image" content="https://wu-hrq.github.io/images/知乎用户获得感谢数量排名.png">
-<meta property="og:image" content="https://wu-hrq.github.io/images/知乎用户获赞数量排名.png">
-<meta property="og:image" content="https://wu-hrq.github.io/images/知乎用户行业分布.png">
-<meta property="og:image" content="https://wu-hrq.github.io/images/知乎用户院校分布.png">
-<meta property="og:image" content="https://wu-hrq.github.io/images/知乎用户现居地分布.png">
-<meta property="og:image" content="https://wu-hrq.github.io/images/知乎用户个人简介词频统计.png">
-<meta property="og:image" content="https://wu-hrq.github.io/images/知乎用户个性签名词频统计.png">
-<meta property="og:updated_time" content="2018-07-22T03:45:10.453Z">
+<meta property="og:updated_time" content="2018-07-22T03:51:54.242Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="30万知乎用户数据爬虫分析">
-<meta name="twitter:description" content="爬取知乎30万用户信息（去重后），并从爬取数据的各维度进行分析，探索知乎用户群体的一些规律。">
-<meta name="twitter:image" content="https://wu-hrq.github.io/images/知乎用户性别对比.png">
+<meta name="twitter:title" content="XMPP协议SASL认证流程">
+<meta name="twitter:description" content="XMPP协议SASL认证流程—以openfire服务器为例">
 
 
 
@@ -193,13 +183,13 @@
 
 
 
-  <link rel="canonical" href="https://WU-hrq.github.io/2018/05/26/zhihu-pachong/"/>
+  <link rel="canonical" href="https://WU-hrq.github.io/2018/06/20/XMPPSASL/"/>
 
 
 
 
 
-  <title>30万知乎用户数据爬虫分析 | 程序猿QQ的个人博客</title>
+  <title>XMPP协议SASL认证流程 | 程序猿QQ的个人博客</title>
   
 
 
@@ -364,7 +354,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://WU-hrq.github.io/2018/05/26/zhihu-pachong/">
+    <link itemprop="mainEntityOfPage" href="https://WU-hrq.github.io/2018/06/20/XMPPSASL/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="程序猿QQ">
@@ -381,7 +371,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">30万知乎用户数据爬虫分析</h1>
+          <h1 class="post-title" itemprop="name headline">XMPP协议SASL认证流程</h1>
         
 
         <div class="post-meta">
@@ -393,8 +383,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-26T00:56:45+08:00">
-                2018-05-26
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-20T08:56:45+08:00">
+                2018-06-20
               </time>
             
 
@@ -416,8 +406,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/爬虫/" itemprop="url" rel="index">
-                    <span itemprop="name">爬虫</span>
+                  <a href="/categories/XMPP/" itemprop="url" rel="index">
+                    <span itemprop="name">XMPP</span>
                   </a>
                 </span>
 
@@ -452,7 +442,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  591
+                  1,846
                 </span>
               
 
@@ -468,7 +458,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  2
+                  9
                 </span>
               
             </div>
@@ -490,51 +480,46 @@
 
       
         <blockquote>
-<p>爬取知乎30万用户信息（去重后），并从爬取数据的各维度进行分析，探索知乎用户群体的一些规律。</p>
+<p>XMPP协议SASL认证流程—以openfire服务器为例</p>
 </blockquote>
  <a id="more"></a>
 <hr>
-<h2 id="重点"><a href="#重点" class="headerlink" title="重点"></a>重点</h2><ul>
-<li>采用MongoDB存储数据</li>
-<li>为应对单个ip爬取被封的情况，采用代理ip池进行爬虫</li>
-<li>为提高爬取速度，采用多线程进行爬取（采用python语言）</li>
-<li>为提高用户质量，只爬取用户的关注列表</li>
-<li>图表展示采用<a href="https://me.bdp.cn/home.html" target="_blank" rel="noopener">BDP</a>，一款云端可视化数据分析工具</li>
-</ul>
-<h2 id="用户分析"><a href="#用户分析" class="headerlink" title="用户分析"></a>用户分析</h2><blockquote>
-<p>本分析不具有代表性,只针对已爬取的30万数据</p>
-</blockquote>
-<p>展示图表如下：</p>
+<h2 id="XMPP协议的完整登录流程为："><a href="#XMPP协议的完整登录流程为：" class="headerlink" title="XMPP协议的完整登录流程为："></a>XMPP协议的完整登录流程为：</h2><blockquote>
 <ul>
-<li><p>知乎用户性别对比<br><img src="/images/知乎用户性别对比.png" alt="知乎用户性别对比">可以看出知乎用户群体中男性占比最大，女性其次，还有一部分用户性别未知，难道有其他性别？</p>
-</li>
-<li><p>知乎用户粉丝数量排名<br><img src="/images/知乎用户粉丝数量排名.png" alt="知乎用户粉丝数量排名">张公子领跑粉丝数量排行榜，粉丝数量超过150多万。丁香医生、李开复粉丝数量也超过100万大关，轮子哥排名也非常靠前。</p>
-</li>
-<li><p>知乎用户获得感谢数量排名<br><img src="/images/知乎用户获得感谢数量排名.png" alt="知乎用户获得感谢数量排名">张公子继续领跑感谢数量排行榜</p>
-</li>
-<li><p>知乎用户获赞数量排名<br><img src="/images/知乎用户获赞数量排名.png" alt="知乎用户获赞数量排名">张公子还是领跑获赞数量排行榜，快突破500万大关了。</p>
-</li>
-<li><p>知乎用户行业分布<br><img src="/images/知乎用户行业分布.png" alt="知乎用户行业分布">从知乎用户行业分布中可以看出，IT行业牢牢占据榜首，教育、金融、法律和医学等领域排名也很靠前。</p>
-</li>
-<li><p>知乎用户院校分布<br><img src="/images/知乎用户院校分布.png" alt="知乎用户院校分布">知乎用户就读院校Top10清一色985，不是清北真是不好意思往上写。</p>
-</li>
-<li><p>知乎用户现居地分布<br><img src="/images/知乎用户现居地分布.png" alt="知乎用户现居地分布">从知乎用户居住地可以看出，知乎用户主要活跃在北上广深等一线城市。</p>
-</li>
-<li><p>知乎用户个人简介词频统计<br><img src="/images/知乎用户个人简介词频统计.png" alt="知乎用户个人简介词频统计">从知乎用户个人简介词频统计可以看出，知乎的用户群体学生占比比较大。</p>
-</li>
-<li><p>知乎用户个性签名词频统计<br><img src="/images/知乎用户个性签名词频统计.png" alt="知乎用户个性签名词频统计">从知乎用户个性签名词频统计可以看出，用户倾向在个性签名中填写职业相关的信息。</p>
-</li>
+<li>TLS协商，构建加密通道</li>
+<li>SASL协商，进行登录验证</li>
+<li>SASL协商后即登录成功，之后进行资源绑定（用户可能通过手机或电脑等登陆）</li>
 </ul>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ul>
-<li>爬取的用户数量不是很大，没有很强的代表性；</li>
-<li>可以进一步进行用户相关性分析；</li>
-</ul>
+</blockquote>
+<p>这里主要讨论SASL协商，假设现在已建立好TLS加密通道。</p>
+<h2 id="step1-客户端向服务器发送一个新的xml流。"><a href="#step1-客户端向服务器发送一个新的xml流。" class="headerlink" title="step1 客户端向服务器发送一个新的xml流。"></a>step1 客户端向服务器发送一个新的xml流。</h2><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">stream:stream</span> <span class="attr">xmlns</span>=<span class="string">'jabber:client'</span> <span class="attr">to</span>=<span class="string">'localhost'</span> <span class="attr">xmlns:stream</span>=<span class="string">'http://etherx.jabber.org/streams'</span> <span class="attr">version</span>=<span class="string">'1.0'</span> <span class="attr">from</span>=<span class="string">'zhangsan@localhost'</span> <span class="attr">xml:lang</span>=<span class="string">'en'</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h2 id="step2-服务器向服务器发送响应流-声明服务器支持的SASL验证机制。"><a href="#step2-服务器向服务器发送响应流-声明服务器支持的SASL验证机制。" class="headerlink" title="step2 服务器向服务器发送响应流, 声明服务器支持的SASL验证机制。"></a>step2 服务器向服务器发送响应流, 声明服务器支持的SASL验证机制。</h2><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version='1.0' encoding='UTF-8'?&gt;<span class="tag">&lt;<span class="name">stream:stream</span> <span class="attr">xmlns:stream</span>=<span class="string">"http://etherx.jabber.org/streams"</span> <span class="attr">xmlns</span>=<span class="string">"jabber:client"</span> <span class="attr">from</span>=<span class="string">"localhost"</span> <span class="attr">id</span>=<span class="string">"45ulb20rwb"</span> <span class="attr">xml:lang</span>=<span class="string">"en"</span> <span class="attr">version</span>=<span class="string">"1.0"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">stream:features</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">mechanisms</span> <span class="attr">xmlns</span>=<span class="string">"urn:ietf:params:xml:ns:xmpp-sasl"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">mechanism</span>&gt;</span>PLAIN<span class="tag">&lt;/<span class="name">mechanism</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">mechanism</span>&gt;</span>SCRAM-SHA-1<span class="tag">&lt;/<span class="name">mechanism</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">mechanism</span>&gt;</span>CRAM-MD5<span class="tag">&lt;/<span class="name">mechanism</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">mechanism</span>&gt;</span>DIGEST-MD5<span class="tag">&lt;/<span class="name">mechanism</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">mechanisms</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">compression</span> <span class="attr">xmlns</span>=<span class="string">"http://jabber.org/features/compress"</span>&gt;</span><span class="tag">&lt;<span class="name">method</span>&gt;</span>zlib<span class="tag">&lt;/<span class="name">method</span>&gt;</span><span class="tag">&lt;/<span class="name">compression</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">ver</span> <span class="attr">xmlns</span>=<span class="string">"urn:xmpp:features:rosterver"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">register</span> <span class="attr">xmlns</span>=<span class="string">"http://jabber.org/features/iq-register"</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">stream:features</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h2 id="step3-客户端向服务器发送auth流，声明客户端选择的SASL验证机制，openfire服务器默认是SCRAM-SHA-1"><a href="#step3-客户端向服务器发送auth流，声明客户端选择的SASL验证机制，openfire服务器默认是SCRAM-SHA-1" class="headerlink" title="step3 客户端向服务器发送auth流，声明客户端选择的SASL验证机制，openfire服务器默认是SCRAM-SHA-1"></a>step3 客户端向服务器发送auth流，声明客户端选择的SASL验证机制，openfire服务器默认是SCRAM-SHA-1</h2><p>auth流内容：<br>n=用户名<br>r=客户端随机数<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">auth</span> <span class="attr">xmlns</span>=<span class="string">'urn:ietf:params:xml:ns:xmpp-sasl'</span> <span class="attr">mechanism</span>=<span class="string">'SCRAM-SHA-1'</span>&gt;</span>biwsbj16aGFuZ3NhbixyPSNhTTRWeHdjO2ZzckZ2M3tuXnxHMVlTWWwzQEdCI1Va<span class="tag">&lt;/<span class="name">auth</span>&gt;</span></span><br><span class="line"></span><br><span class="line">经过base64解码后：n,,n=zhangsan,r=#aM4Vxwc;fsrFv3&#123;n^|G1YSYl3@GB#UZ</span><br></pre></td></tr></table></figure></p>
+<p>—————前方高能————————<br>发现网上不少博客说的都是PLAIN机制的验证流程，此处从源码层面剖析下SCRAM-SHA-1机制。因为PLAIN机制，客户端会把用户名和密码发给服务器，不经过加密，只是base64编码了一下。服务器会从数据库(例如mysql数据库)的ofUser表中取出密码，解密后与客户端传来的密码比对即可。不够安全。感兴趣可以看下SaslServerPlainImpl类的evaluateResponse方法。</p>
+<pre><code>下面介绍SCRAM-SHA-1的流程。服务器接收到auth流后，StanzaHandler类的process方法会被调用。process方法关键代码如下：
+</code></pre><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">else</span> <span class="keyword">if</span> (<span class="string">"auth"</span>.equals(tag)) &#123;</span><br><span class="line">    startedSASL = <span class="keyword">true</span>;</span><br><span class="line">    saslStatus = SASLAuthentication.handle(session, doc);</span><br><span class="line">&#125; <span class="keyword">else</span> <span class="keyword">if</span> (startedSASL &amp;&amp; <span class="string">"response"</span>.equals(tag) || <span class="string">"abort"</span>.equals(tag)) &#123;</span><br><span class="line">    saslStatus = SASLAuthentication.handle(session, doc);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>判断xml流的类型是auth后，会调用SASLAuthentication.handle()方法，其实之后客户端发来的response流或abort流也是调用该方法。handle方法中会判断该xml流是auth还是response。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">switch</span> ( ElementType.valueOfCaseInsensitive( doc.getName() ) )</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">case</span> ABORT:</span><br><span class="line">                    <span class="keyword">throw</span> <span class="keyword">new</span> SaslFailureException( Failure.ABORTED );</span><br><span class="line">                <span class="keyword">case</span> AUTH:</span><br><span class="line">                    ...</span><br><span class="line">                    SaslServer saslServer = Sasl.createSaslServer( mechanismName, <span class="string">"xmpp"</span>, serverName, props, <span class="keyword">new</span> XMPPCallbackHandler() );</span><br><span class="line">                    ...</span><br><span class="line">                    session.setSessionData( <span class="string">"SaslServer"</span>, saslServer );</span><br><span class="line">                    ...</span><br><span class="line">                <span class="keyword">case</span> RESPONSE:</span><br><span class="line">                    <span class="comment">// Either a challenge or success data.</span></span><br><span class="line">                    <span class="keyword">final</span> <span class="keyword">byte</span>[] challenge = saslServer.evaluateResponse( decoded );</span><br></pre></td></tr></table></figure></p>
+<p>判断是auth后，主要就是创建了Saslserver服务器，会根据之前所选的SASL验证机制创建对应的服务器。此处创建的是ScramSha1SaslServer服务器，在SaslServerFactoryImpl类的createSaslServer方法中创建，代码如下：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">case</span> <span class="string">"PLAIN"</span>:</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> SaslServerPlainImpl( protocol, serverName, props, cbh );</span><br><span class="line"><span class="keyword">case</span> <span class="string">"SCRAM-SHA-1"</span>:</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> ScramSha1SaslServer();</span><br><span class="line"><span class="keyword">case</span> <span class="string">"ANONYMOUS"</span>:</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> AnonymousSaslServer( session );</span><br><span class="line"><span class="keyword">case</span> <span class="string">"EXTERNAL"</span>:</span><br><span class="line">    <span class="keyword">if</span> ( session <span class="keyword">instanceof</span> LocalClientSession )</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> ExternalClientSaslServer( (LocalClientSession) session );</span><br><span class="line">    <span class="keyword">if</span> ( session <span class="keyword">instanceof</span> LocalIncomingServerSession )</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> ExternalServerSaslServer( (LocalIncomingServerSession) session );</span><br><span class="line"><span class="keyword">case</span> JiveSharedSecretSaslServer.NAME:</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> JiveSharedSecretSaslServer();</span><br></pre></td></tr></table></figure></p>
+<p>ScramSha1SaslServer类会在收到auth流后向客户端发送challenge流，之后客户端会发出应答流response，经过SASLAuthentication.handle()方法处理后也是交给ScramSha1SaslServer类进行验证。</p>
+<p>—————前方极度高能————————<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">private</span> State state = State.INITIAL;    <span class="comment">//state初始化时的状态</span></span><br><span class="line">...</span><br><span class="line"><span class="keyword">switch</span> (state)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">case</span> INITIAL:</span><br><span class="line">            challenge = generateServerFirstMessage(response);</span><br><span class="line">            state = State.IN_PROGRESS;    <span class="comment">//服务器发送challenge后状态变为IN_PROGRESS</span></span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">case</span> IN_PROGRESS:</span><br><span class="line">            challenge = generateServerFinalMessage(response);</span><br><span class="line">            state = State.COMPLETE;    <span class="comment">//服务器验证完response后状态变为COMPLETE</span></span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">case</span> COMPLETE:</span><br><span class="line">            <span class="keyword">if</span> (response == <span class="keyword">null</span> || response.length == <span class="number">0</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                challenge = <span class="keyword">new</span> <span class="keyword">byte</span>[<span class="number">0</span>];</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        <span class="keyword">default</span>:</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> SaslException(<span class="string">"No response expected in state "</span> + state);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="step4-generateServerFirstMessage方法负责对auth流进行处理并发出challenge流。"><a href="#step4-generateServerFirstMessage方法负责对auth流进行处理并发出challenge流。" class="headerlink" title="step4 generateServerFirstMessage方法负责对auth流进行处理并发出challenge流。"></a>step4 generateServerFirstMessage方法负责对auth流进行处理并发出challenge流。</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">byte</span>[] generateServerFirstMessage(<span class="keyword">final</span> <span class="keyword">byte</span>[] response) <span class="keyword">throws</span> SaslException &#123;</span><br><span class="line">    String clientFirstMessage = <span class="keyword">new</span> String(response, StandardCharsets.UTF_8);</span><br><span class="line">    Matcher m = CLIENT_FIRST_MESSAGE.matcher(clientFirstMessage);</span><br><span class="line">    <span class="keyword">if</span> (!m.matches()) &#123;</span><br><span class="line">       <span class="keyword">throw</span> <span class="keyword">new</span> SaslException(<span class="string">"Invalid first client message"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    clientFirstMessageBare = m.group(<span class="number">5</span>);</span><br><span class="line">    username = m.group(<span class="number">6</span>);   <span class="comment">//从auth流中得到用户名</span></span><br><span class="line">    String clientNonce = m.group(<span class="number">7</span>);    <span class="comment">//从auth流中得到客户端随机数</span></span><br><span class="line">    nonce = clientNonce + UUID.randomUUID().toString();    <span class="comment">//对客户端随机数再次随机，之后会对其验证</span></span><br><span class="line">    serverFirstMessage = String.format(<span class="string">"r=%s,s=%s,i=%d"</span>, nonce, DatatypeConverter.printBase64Binary(getSalt(username)),getIterations(username));    <span class="comment">//准备发给客户端的challenge流</span></span><br><span class="line">    <span class="keyword">return</span> serverFirstMessage.getBytes(StandardCharsets.UTF_8);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>challenge流内容：<br>r=服务端随机数(客户端随机数+UUID)<br>s=salt(base64编码的盐，存储在openfiref服务端数据库的ofUser表中)<br>i =迭代次数(存储在openfiref服务端数据库的ofUser表中)</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">challenge</span> <span class="attr">xmlns</span>=<span class="string">"urn:ietf:params:xml:ns:xmpp-sasl"</span>&gt;</span>cj0jYU00Vnh3Yztmc3JGdjN7bl58RzFZU1lsM0BHQiNVWjA3MzAzYzgwLWM2YTctNGRjMC1iZmUyLWVjODNlYmJmY2FlMCxzPVdmckVRTXVmZVdCSmoxS0dUR0p5aVJuaGIrWVJFQzZKLGk9NDA5Ng==<span class="tag">&lt;/<span class="name">challenge</span>&gt;</span></span><br><span class="line"></span><br><span class="line">解码后内容为：r=#aM4Vxwc;fsrFv3&#123;n^|G1YSYl3@GB#UZ07303c80-c6a7-4dc0-bfe2-ec83ebbfcae0,s=WfrEQMufeWBJj1KGTGJyiRnhb+YREC6J,i=4096</span><br></pre></td></tr></table></figure>
+<h2 id="step5-客户端会根据用户输入密码、从服务器challenge流中获得的盐和迭代次数，计算出一些数值，并作为response流发给服务器去验证。"><a href="#step5-客户端会根据用户输入密码、从服务器challenge流中获得的盐和迭代次数，计算出一些数值，并作为response流发给服务器去验证。" class="headerlink" title="step5 客户端会根据用户输入密码、从服务器challenge流中获得的盐和迭代次数，计算出一些数值，并作为response流发给服务器去验证。"></a>step5 客户端会根据用户输入密码、从服务器challenge流中获得的盐和迭代次数，计算出一些数值，并作为response流发给服务器去验证。</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">clientFinalMessageBare = <span class="string">"c=biws,r=服务端随机数"</span></span><br><span class="line">saltedPassword = PBKDF2-SHA-<span class="number">1</span>(normalizedPassword, salt, i)</span><br><span class="line">clientKey = HMAC-SHA-<span class="number">1</span>(saltedPassword, <span class="string">"客户端密钥"</span>)</span><br><span class="line">storedKey = SHA-<span class="number">1</span>(clientKey)</span><br><span class="line">authMessage = auth流内容+<span class="string">","</span>+challenge流内容+<span class="string">","</span>clientFinalMessageBare</span><br><span class="line">clientSignature = HMAC-SHA-<span class="number">1</span>(storedKey, authMessage)</span><br><span class="line">clientProof = clientKey 异或 clientSignature</span><br><span class="line">serverKey = HMAC-SHA-<span class="number">1</span>(saltedPassword, <span class="string">"服务端密钥"</span>)</span><br><span class="line">serverSignature = HMAC-SHA-<span class="number">1</span>(serverKey, authMessage)</span><br><span class="line">clientFinalMessage = clientFinalMessageBare<span class="string">",p="</span>base64(clientProof)<span class="string">"</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">客户端对clientFinalMessage进行base64编码并将其作为response流发送给服务器</span></span><br></pre></td></tr></table></figure>
+<p>response流内容：<br>c=biws<br>r=服务端随机数<br>p=base64(clientProof)<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">response</span> <span class="attr">xmlns</span>=<span class="string">'urn:ietf:params:xml:ns:xmpp-sasl'</span>&gt;</span>Yz1iaXdzLHI9I2FNNFZ4d2M7ZnNyRnYze25efEcxWVNZbDNAR0IjVVowNzMwM2M4MC1jNmE3LTRkYzAtYmZlMi1lYzgzZWJiZmNhZTAscD1QdUE5OGVSVXBBSGhqa2EwdDJ3dVQ1TFBvU1k9<span class="tag">&lt;/<span class="name">response</span>&gt;</span></span><br><span class="line"></span><br><span class="line">解码后内容为：c=biws,r=#aM4Vxwc;fsrFv3&#123;n^|G1YSYl3@GB#UZ07303c80-c6a7-4dc0-bfe2-ec83ebbfcae0,p=PuA98eRUpAHhjka0t2wuT5LPoSY=</span><br></pre></td></tr></table></figure></p>
+<h2 id="step6-ScramSha1SaslServer类的generateServerFinalMessage方法负责对response流进行验证，验证通过会向客户端发送success流。"><a href="#step6-ScramSha1SaslServer类的generateServerFinalMessage方法负责对response流进行验证，验证通过会向客户端发送success流。" class="headerlink" title="step6 ScramSha1SaslServer类的generateServerFinalMessage方法负责对response流进行验证，验证通过会向客户端发送success流。"></a>step6 ScramSha1SaslServer类的generateServerFinalMessage方法负责对response流进行验证，验证通过会向客户端发送success流。</h2><p>generateServerFinalMessage方法核心代码：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">String clientFinalMessage = <span class="keyword">new</span> String(response, StandardCharsets.UTF_8);</span><br><span class="line">Matcher m = CLIENT_FINAL_MESSAGE.matcher(clientFinalMessage);</span><br><span class="line">String clientFinalMessageWithoutProof = m.group(<span class="number">1</span>);</span><br><span class="line">String clientNonce = m.group(<span class="number">3</span>);    <span class="comment">//客户端发来的服务器随机数</span></span><br><span class="line">String proof = m.group(<span class="number">4</span>);    <span class="comment">//base64(clientProof)</span></span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span> (!nonce.equals(clientNonce)) &#123;    <span class="comment">//验证服务器之前生成的随机数和客户端发来的服务器随机数是否一致</span></span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> SaslException(<span class="string">"Client final message has incorrect nonce value"</span>);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            String authMessage = clientFirstMessageBare + <span class="string">","</span> + serverFirstMessage + <span class="string">","</span> + clientFinalMessageWithoutProof;</span><br><span class="line">            <span class="keyword">byte</span>[] storedKey = getStoredKey( username );    <span class="comment">//根据用户名查找服务端存储的storedKey</span></span><br><span class="line">            <span class="keyword">if</span> (storedKey == <span class="keyword">null</span>) &#123;</span><br><span class="line">                <span class="keyword">throw</span> <span class="keyword">new</span> SaslException(<span class="string">"No stored key for user '"</span>+username+<span class="string">"'"</span>);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">byte</span>[] serverKey = getServerKey(username);    <span class="comment">//根据用户名查找服务端存储的serverKey</span></span><br><span class="line">            <span class="keyword">if</span> (serverKey == <span class="keyword">null</span>) &#123;</span><br><span class="line">                <span class="keyword">throw</span> <span class="keyword">new</span> SaslException(<span class="string">"No server key for user '"</span>+username+<span class="string">"'"</span>);</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">byte</span>[] clientSignature = ScramUtils.computeHmac(storedKey, authMessage);</span><br><span class="line">            <span class="keyword">byte</span>[] serverSignature = ScramUtils.computeHmac(serverKey, authMessage);</span><br><span class="line">            </span><br><span class="line">            <span class="keyword">byte</span>[] clientKey = clientSignature.clone();</span><br><span class="line">            <span class="keyword">byte</span>[] decodedProof = DatatypeConverter.parseBase64Binary(proof);</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; clientKey.length; i++) &#123;</span><br><span class="line">                clientKey[i] ^= decodedProof[i];    <span class="comment">//将clientProof与clientSignature进行异或，还原出clientKey</span></span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="comment">//将服务端存储的storedKey和clientKey经SHA-1算法得到值进行比对</span></span><br><span class="line">            <span class="keyword">if</span> (!Arrays.equals(storedKey, MessageDigest.getInstance(<span class="string">"SHA-1"</span>).digest(clientKey))) &#123;</span><br><span class="line">                <span class="keyword">throw</span> <span class="keyword">new</span> SaslException(<span class="string">"Authentication failed"</span>);</span><br><span class="line">            &#125;</span><br><span class="line">            </span><br><span class="line">            <span class="comment">//比对成功则表明验证成功，向客户端发送success流</span></span><br><span class="line">            <span class="keyword">return</span> (<span class="string">"v="</span> + DatatypeConverter.printBase64Binary(serverSignature))</span><br><span class="line">                    .getBytes(StandardCharsets.UTF_8);</span><br></pre></td></tr></table></figure></p>
+<p>————————-关键点————————————-<br>客户端：clientKey 异或 clientSignature = clientProof<br>服务端：clientProof异或clientSignature=clientKey，便可还原出clientKey。再将服务端存储的storedKey和clientKey经SHA-1算法得到值进行比对，即可完成验证。</p>
+<p>success流内容：<br>v=base64(serverSignature)<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">success</span> <span class="attr">xmlns</span>=<span class="string">"urn:ietf:params:xml:ns:xmpp-sasl"</span>&gt;</span>dj1WZUtxOFFTRFBTbXdaNUM2V1hvanZTTzJwdTA9<span class="tag">&lt;/<span class="name">success</span>&gt;</span></span><br><span class="line"></span><br><span class="line">解码后内容为：v=VeKq8QSDPSmwZ5C6WXojvSO2pu0=</span><br></pre></td></tr></table></figure></p>
+<p>至此，XMPP协议的SASL协商完成，之后客户端发送新的流，完成资源绑定等流程。<br>Tip: 建议下载openfire源码跑一下流程。</p>
+<hr>
+<p>如有错误，务必指出，十分感谢。</p>
+<p>作者 ：程序猿QQ<br>2018 年 07月 20日    </p>
 <hr>
 <h2 id="日常歌单推荐"><a href="#日常歌单推荐" class="headerlink" title="日常歌单推荐"></a>日常歌单推荐</h2><blockquote>
-<p>云音乐五周年 | 感谢你的一路相伴</p>
+<p>山间竹林</p>
 </blockquote>
 
-    <div id="aplayer-NXWDOKEW" class="aplayer aplayer-tag-marker meting-tag-marker" data-id="2192790772" data-server="netease" data-type="playlist" data-mode="circulation" data-autoplay="false" data-mutex="true" data-listmaxheight="340px" data-preload="auto" data-theme="#f64f59"></div>
+    <div id="aplayer-vWUjNadp" class="aplayer aplayer-tag-marker meting-tag-marker" data-id="2322305461" data-server="netease" data-type="playlist" data-mode="circulation" data-autoplay="false" data-mutex="true" data-listmaxheight="340px" data-preload="auto" data-theme="#f64f59"></div>
 
       
     </div>
@@ -561,12 +546,12 @@
   <!-- JS库 sweetalert 可修改路径 -->
   <script src="https://cdn.bootcss.com/jquery/2.0.0/jquery.min.js"></script>
   <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-  <!--<p><span>本文标题:</span><a href="/2018/05/26/zhihu-pachong/">30万知乎用户数据爬虫分析</a></p>-->
+  <!--<p><span>本文标题:</span><a href="/2018/06/20/XMPPSASL/">XMPP协议SASL认证流程</a></p>-->
   <p><span>文章作者:</span><a href="/" title="访问 程序猿QQ 的个人博客">程序猿QQ</a></p>
-  <!--<p><span>发布时间:</span>2018年05月26日 - 00:05</p>
+  <!--<p><span>发布时间:</span>2018年06月20日 - 08:06</p>
   <p><span>最后更新:</span>2018年07月22日 - 11:07</p>-->
-  <p><span>原始链接:</span><a href="/2018/05/26/zhihu-pachong/" title="30万知乎用户数据爬虫分析">https://WU-hrq.github.io/2018/05/26/zhihu-pachong/</a>
-    <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="https://WU-hrq.github.io/2018/05/26/zhihu-pachong/"  aria-label="复制成功！"></i></span>
+  <p><span>原始链接:</span><a href="/2018/06/20/XMPPSASL/" title="XMPP协议SASL认证流程">https://WU-hrq.github.io/2018/06/20/XMPPSASL/</a>
+    <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="https://WU-hrq.github.io/2018/06/20/XMPPSASL/"  aria-label="复制成功！"></i></span>
   </p>
   <p><span>许可协议:</span>本博客所有文章除特别声明外，均采用 <i class="fa fa-creative-commons"></i><a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">CC BY-NC-SA 4.0</a>许可协议，转载请保留原文链接及作者。</p>  
 </div>
@@ -621,9 +606,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/爬虫/" rel="tag"><i class="fa fa-tag"></i> 爬虫</a>
+            <a href="/tags/XMPP/" rel="tag"><i class="fa fa-tag"></i> XMPP</a>
           
-            <a href="/tags/知乎/" rel="tag"><i class="fa fa-tag"></i> 知乎</a>
+            <a href="/tags/SASL/" rel="tag"><i class="fa fa-tag"></i> SASL</a>
           
         </div>
       
@@ -651,18 +636,14 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/06/20/XMPPSASL/" rel="prev" title="XMPP协议SASL认证流程">
-                <i class="fa fa-chevron-left"></i> XMPP协议SASL认证流程
-              </a>
-            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/05/20/github-domain/" rel="next" title="Github博客绑定个性域名">
-                Github博客绑定个性域名 <i class="fa fa-chevron-right"></i>
+              <a href="/2018/05/26/zhihu-pachong/" rel="next" title="30万知乎用户数据爬虫分析">
+                30万知乎用户数据爬虫分析 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -851,7 +832,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#重点"><span class="nav-number">1.</span> <span class="nav-text">重点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#用户分析"><span class="nav-number">2.</span> <span class="nav-text">用户分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">3.</span> <span class="nav-text">总结</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#日常歌单推荐"><span class="nav-number">4.</span> <span class="nav-text">日常歌单推荐</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#XMPP协议的完整登录流程为："><span class="nav-number">1.</span> <span class="nav-text">XMPP协议的完整登录流程为：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#step1-客户端向服务器发送一个新的xml流。"><span class="nav-number">2.</span> <span class="nav-text">step1 客户端向服务器发送一个新的xml流。</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#step2-服务器向服务器发送响应流-声明服务器支持的SASL验证机制。"><span class="nav-number">3.</span> <span class="nav-text">step2 服务器向服务器发送响应流, 声明服务器支持的SASL验证机制。</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#step3-客户端向服务器发送auth流，声明客户端选择的SASL验证机制，openfire服务器默认是SCRAM-SHA-1"><span class="nav-number">4.</span> <span class="nav-text">step3 客户端向服务器发送auth流，声明客户端选择的SASL验证机制，openfire服务器默认是SCRAM-SHA-1</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#step4-generateServerFirstMessage方法负责对auth流进行处理并发出challenge流。"><span class="nav-number">5.</span> <span class="nav-text">step4 generateServerFirstMessage方法负责对auth流进行处理并发出challenge流。</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#step5-客户端会根据用户输入密码、从服务器challenge流中获得的盐和迭代次数，计算出一些数值，并作为response流发给服务器去验证。"><span class="nav-number">6.</span> <span class="nav-text">step5 客户端会根据用户输入密码、从服务器challenge流中获得的盐和迭代次数，计算出一些数值，并作为response流发给服务器去验证。</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#step6-ScramSha1SaslServer类的generateServerFinalMessage方法负责对response流进行验证，验证通过会向客户端发送success流。"><span class="nav-number">7.</span> <span class="nav-text">step6 ScramSha1SaslServer类的generateServerFinalMessage方法负责对response流进行验证，验证通过会向客户端发送success流。</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#日常歌单推荐"><span class="nav-number">8.</span> <span class="nav-text">日常歌单推荐</span></a></li></ol></div>
             
 
           </div>
