@@ -1,0 +1,1473 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+  <script>
+  (function(i,s,o,g,r,a,m){i["DaoVoiceObject"]=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;a.charset="utf-8";m.parentNode.insertBefore(a,m)})(window,document,"script",('https:' == document.location.protocol ? 'https:' : 'http:') + "//widget.daovoice.io/widget/0f81ff2f.js","daovoice")
+  daovoice('init', {
+      app_id: "c279845e"
+    });
+  daovoice('update');
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon2.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon2.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon2.ico?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/favicon2.ico?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="XMPP,TLS," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="程序猿QQ的个人博客" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="XMPP协议网络抓包分析（包内容来自openfire服务器和spark客户端实际通信）">
+<meta name="keywords" content="XMPP,TLS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="XMPP协议网络抓包分析-以openfire服务器为例">
+<meta property="og:url" content="https://www.wacj.top/2018/06/16/XMPPTLS/index.html">
+<meta property="og:site_name" content="程序猿QQ的个人博客">
+<meta property="og:description" content="XMPP协议网络抓包分析（包内容来自openfire服务器和spark客户端实际通信）">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-07-30T16:45:51.105Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="XMPP协议网络抓包分析-以openfire服务器为例">
+<meta name="twitter:description" content="XMPP协议网络抓包分析（包内容来自openfire服务器和spark客户端实际通信）">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":true},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://www.wacj.top/2018/06/16/XMPPTLS/"/>
+
+
+
+
+
+  <title>XMPP协议网络抓包分析-以openfire服务器为例 | 程序猿QQ的个人博客</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+	<a href="https://github.com/WU-hrq" class="github-corner" aria-label="View source on Github"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">程序猿QQ的个人博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://www.wacj.top/2018/06/16/XMPPTLS/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="程序猿QQ">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/user2.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="程序猿QQ的个人博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">XMPP协议网络抓包分析-以openfire服务器为例</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-16T08:56:45+08:00">
+                2018-06-16
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/XMPP/" itemprop="url" rel="index">
+                    <span itemprop="name">XMPP</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"> 阅读次数</i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  3,129
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  15
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>XMPP协议网络抓包分析（包内容来自openfire服务器和spark客户端实际通信）</p>
+</blockquote>
+ <a id="more"></a>
+<hr>
+<h2 id="XMPP登录流程"><a href="#XMPP登录流程" class="headerlink" title="XMPP登录流程"></a>XMPP登录流程</h2><p>Step 1 客户端发送给服务器<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">stream:stream</span> <span class="attr">xmlns</span>=<span class="string">'jabber:client'</span> <span class="attr">to</span>=<span class="string">'localhost'</span> <span class="attr">xmlns:stream</span>=<span class="string">'http://etherx.jabber.org/streams'</span> <span class="attr">version</span>=<span class="string">'1.0'</span> <span class="attr">from</span>=<span class="string">'zhangsan@localhost'</span> <span class="attr">xml:lang</span>=<span class="string">'en'</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>Step2 服务器发送给客户端<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version='1.0' encoding='UTF-8'?&gt;<span class="tag">&lt;<span class="name">stream:stream</span> <span class="attr">xmlns:stream</span>=<span class="string">"http://etherx.jabber.org/streams"</span> <span class="attr">xmlns</span>=<span class="string">"jabber:client"</span> <span class="attr">from</span>=<span class="string">"localhost"</span> <span class="attr">id</span>=<span class="string">"agis7375o9"</span> <span class="attr">xml:lang</span>=<span class="string">"en"</span> <span class="attr">version</span>=<span class="string">"1.0"</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>Step3 服务器发送feature流<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">stream:features</span>&gt;</span><span class="tag">&lt;<span class="name">starttls</span> <span class="attr">xmlns</span>=<span class="string">"urn:ietf:params:xml:ns:xmpp-tls"</span>&gt;</span><span class="tag">&lt;/<span class="name">starttls</span>&gt;</span><span class="tag">&lt;<span class="name">mechanisms</span> <span class="attr">xmlns</span>=<span class="string">"urn:ietf:params:xml:ns:xmpp-sasl"</span>&gt;</span><span class="tag">&lt;<span class="name">mechanism</span>&gt;</span>PLAIN<span class="tag">&lt;/<span class="name">mechanism</span>&gt;</span><span class="tag">&lt;<span class="name">mechanism</span>&gt;</span>SCRAM-SHA-1<span class="tag">&lt;/<span class="name">mechanism</span>&gt;</span><span class="tag">&lt;<span class="name">mechanism</span>&gt;</span>CRAM-MD5<span class="tag">&lt;/<span class="name">mechanism</span>&gt;</span><span class="tag">&lt;<span class="name">mechanism</span>&gt;</span>DIGEST-MD5<span class="tag">&lt;/<span class="name">mechanism</span>&gt;</span><span class="tag">&lt;/<span class="name">mechanisms</span>&gt;</span><span class="tag">&lt;<span class="name">compression</span> <span class="attr">xmlns</span>=<span class="string">"http://jabber.org/features/compress"</span>&gt;</span><span class="tag">&lt;<span class="name">method</span>&gt;</span>zlib<span class="tag">&lt;/<span class="name">method</span>&gt;</span><span class="tag">&lt;/<span class="name">compression</span>&gt;</span><span class="tag">&lt;<span class="name">ver</span> <span class="attr">xmlns</span>=<span class="string">"urn:xmpp:features:rosterver"</span>/&gt;</span><span class="tag">&lt;<span class="name">register</span> <span class="attr">xmlns</span>=<span class="string">"http://jabber.org/features/iq-register"</span>/&gt;</span><span class="tag">&lt;/<span class="name">stream:features</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>Step4 客户端发送starttls<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">starttls</span> <span class="attr">xmlns</span>=<span class="string">'urn:ietf:params:xml:ns:xmpp-tls'</span>&gt;</span><span class="tag">&lt;/<span class="name">starttls</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>Step5 服务器发送proceed<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">proceed</span> <span class="attr">xmlns</span>=<span class="string">"urn:ietf:params:xml:ns:xmpp-tls"</span>/&gt;</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="下面开始TLS握手阶段，”握手阶段”涉及四次通信："><a href="#下面开始TLS握手阶段，”握手阶段”涉及四次通信：" class="headerlink" title="下面开始TLS握手阶段，”握手阶段”涉及四次通信："></a>下面开始TLS握手阶段，”握手阶段”涉及四次通信：</h2><p>Step1 客户端发出请求（Client Hello）<br>客户端向服务器发出加密通信的请求，包含以下信息：</p>
+<blockquote>
+<p>支持的协议版本，比如TLS 1.2版<br>一个客户端生成的随机数，稍后用于生成”对话密钥”<br>支持的加密方法列表，比如RSA公钥加密<br>支持的压缩方法</p>
+</blockquote>
+<p>Client Hello包内容：<br>Secure Sockets Layer<br>    TLSv1.2 Record Layer: Handshake Protocol: Client Hello<br>        Content Type: Handshake (22)<br>        Version: TLS 1.2 (0x0303)<br>        Length: 161<br>        Handshake Protocol: Client Hello<br>            Handshake Type: Client Hello (1)<br>            Length: 157<br>            Version: TLS 1.2 (0x0303)<br>            Random: 5b4ea072ce385719769f4d6fa723b90d50532340b905dc66…<br>            Session ID Length: 0<br>            Cipher Suites Length: 58<br>            Cipher Suites (29 suites)<br>            Compression Methods Length: 1<br>            Compression Methods (1 method)<br>            Extensions Length: 58<br>            Extension: supported_groups (len=22)<br>            Extension: ec_point_formats (len=2)<br>            Extension: signature_algorithms (len=22)</p>
+<p>Client Hello包展开内容：<br>Secure Sockets Layer<br>    TLSv1.2 Record Layer: Handshake Protocol: Client Hello<br>        Content Type: Handshake (22)<br>        Version: TLS 1.2 (0x0303)<br>        Length: 161<br>        Handshake Protocol: Client Hello<br>            Handshake Type: Client Hello (1)<br>            Length: 157<br>            Version: TLS 1.2 (0x0303)<br>            Random: 5b4ea072ce385719769f4d6fa723b90d50532340b905dc66…<br>            Session ID Length: 0<br>            Cipher Suites Length: 58<br>            Cipher Suites (29 suites)<br>                Cipher Suite: TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA256 (0xc023)<br>                Cipher Suite: TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256 (0xc027)<br>                Cipher Suite: TLS_RSA_WITH_AES_128_CBC_SHA256 (0x003c)<br>                Cipher Suite: TLS_ECDH_ECDSA_WITH_AES_128_CBC_SHA256 (0xc025)<br>                Cipher Suite: TLS_ECDH_RSA_WITH_AES_128_CBC_SHA256 (0xc029)<br>                Cipher Suite: TLS_DHE_RSA_WITH_AES_128_CBC_SHA256 (0x0067)<br>                Cipher Suite: TLS_DHE_DSS_WITH_AES_128_CBC_SHA256 (0x0040)<br>                Cipher Suite: TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA (0xc009)<br>                Cipher Suite: TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA (0xc013)<br>                Cipher Suite: TLS_RSA_WITH_AES_128_CBC_SHA (0x002f)<br>                Cipher Suite: TLS_ECDH_ECDSA_WITH_AES_128_CBC_SHA (0xc004)<br>                Cipher Suite: TLS_ECDH_RSA_WITH_AES_128_CBC_SHA (0xc00e)<br>                Cipher Suite: TLS_DHE_RSA_WITH_AES_128_CBC_SHA (0x0033)<br>                Cipher Suite: TLS_DHE_DSS_WITH_AES_128_CBC_SHA (0x0032)<br>                Cipher Suite: TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256 (0xc02b)<br>                Cipher Suite: TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256 (0xc02f)<br>                Cipher Suite: TLS_RSA_WITH_AES_128_GCM_SHA256 (0x009c)<br>                Cipher Suite: TLS_ECDH_ECDSA_WITH_AES_128_GCM_SHA256 (0xc02d)<br>                Cipher Suite: TLS_ECDH_RSA_WITH_AES_128_GCM_SHA256 (0xc031)<br>                Cipher Suite: TLS_DHE_RSA_WITH_AES_128_GCM_SHA256 (0x009e)<br>                Cipher Suite: TLS_DHE_DSS_WITH_AES_128_GCM_SHA256 (0x00a2)<br>                Cipher Suite: TLS_ECDHE_ECDSA_WITH_3DES_EDE_CBC_SHA (0xc008)<br>                Cipher Suite: TLS_ECDHE_RSA_WITH_3DES_EDE_CBC_SHA (0xc012)<br>                Cipher Suite: TLS_RSA_WITH_3DES_EDE_CBC_SHA (0x000a)<br>                Cipher Suite: TLS_ECDH_ECDSA_WITH_3DES_EDE_CBC_SHA (0xc003)<br>                Cipher Suite: TLS_ECDH_RSA_WITH_3DES_EDE_CBC_SHA (0xc00d)<br>                Cipher Suite: TLS_DHE_RSA_WITH_3DES_EDE_CBC_SHA (0x0016)<br>                Cipher Suite: TLS_DHE_DSS_WITH_3DES_EDE_CBC_SHA (0x0013)<br>                Cipher Suite: TLS_EMPTY_RENEGOTIATION_INFO_SCSV (0x00ff)<br>            Compression Methods Length: 1<br>            Compression Methods (1 method)<br>            Extensions Length: 58<br>            Extension: supported_groups (len=22)<br>            Extension: ec_point_formats (len=2)<br>            Extension: signature_algorithms (len=22)<br>                Type: signature_algorithms (13)<br>                Length: 22<br>                Signature Hash Algorithms Length: 20<br>                Signature Hash Algorithms (10 algorithms)<br>                    Signature Algorithm: ecdsa_secp521r1_sha512 (0x0603)<br>                    Signature Algorithm: rsa_pkcs1_sha512 (0x0601)<br>                    Signature Algorithm: ecdsa_secp384r1_sha384 (0x0503)<br>                    Signature Algorithm: rsa_pkcs1_sha384 (0x0501)<br>                    Signature Algorithm: ecdsa_secp256r1_sha256 (0x0403)<br>                    Signature Algorithm: rsa_pkcs1_sha256 (0x0401)<br>                    Signature Algorithm: SHA256 DSA (0x0402)<br>                    Signature Algorithm: ecdsa_sha1 (0x0203)<br>                    Signature Algorithm: rsa_pkcs1_sha1 (0x0201)<br>                    Signature Algorithm: SHA1 DSA (0x0202)</p>
+<p>Step2 服务器回应（SeverHello）<br>服务器的回应包含以下内容：</p>
+<blockquote>
+<p>确认使用的加密通信协议版本，比如TLS 1.2版本。如果浏览器与服务器支持的版本不一致，服务器关闭加密通信。<br>一个服务器生成的随机数，稍后用于生成”对话密钥”。<br>确认使用的加密方法，比如RSA公钥加密。<br>服务器证书。<br>此外，如果服务器需要确认客户端的身份，就会再包含一项请求，要求客户端提供”客户端证书”</p>
+</blockquote>
+<p>该步骤在openfire服务器实际通信中包含以下内容：<br>Server Hello、Certificate、Server Key Exchange、Server Hello Done</p>
+<p>服务器回应包内容：<br>Secure Sockets Layer<br>    TLSv1.2 Record Layer: Handshake Protocol: Multiple Handshake Messages<br>        Content Type: Handshake (22)<br>        Version: TLS 1.2 (0x0303)<br>        Length: 1216<br>        Handshake Protocol: Server Hello<br>        Handshake Protocol: Certificate<br>        Handshake Protocol: Server Key Exchange<br>        Handshake Protocol: Server Hello Done</p>
+<p>服务器回应包展开：<br>Secure Sockets Layer<br>    TLSv1.2 Record Layer: Handshake Protocol: Multiple Handshake Messages<br>        Content Type: Handshake (22)<br>        Version: TLS 1.2 (0x0303)<br>        Length: 1216<br>        Handshake Protocol: Server Hello<br>            Handshake Type: Server Hello (2)<br>            Length: 77<br>            Version: TLS 1.2 (0x0303)<br>            Random: 5b4ea071bf98025de4c44612645a2c898bb1568ef83eb5e7…<br>            Session ID Length: 32<br>            Session ID: 5b4ea071ebf855fda26b52e16bba271e56fe51973d539733…<br>            Cipher Suite: TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256 (0xc027)<br>            Compression Method: null (0)<br>            Extensions Length: 5<br>            Extension: renegotiation_info (len=1)<br>        Handshake Protocol: Certificate<br>            Handshake Type: Certificate (11)<br>            Length: 794<br>            Certificates Length: 791<br>            Certificates (791 bytes)<br>        Handshake Protocol: Server Key Exchange<br>            Handshake Type: Server Key Exchange (12)<br>            Length: 329<br>            EC Diffie-Hellman Server Params<br>                Curve Type: named_curve (0x03)<br>                Named Curve: secp256r1 (0x0017)<br>                Pubkey Length: 65<br>                Pubkey: 04a1e495e7a74597de381dea4ade852d4fe68a75726dda92…<br>                Signature Algorithm: rsa_pkcs1_sha512 (0x0601)<br>                    Signature Hash Algorithm Hash: SHA512 (6)<br>                    Signature Hash Algorithm Signature: RSA (1)<br>                Signature Length: 256<br>                Signature: 2d951780af8d09f4e50d51129d93af3796cd768df68c7982…<br>        Handshake Protocol: Server Hello Done<br>            Handshake Type: Server Hello Done (14)<br>            Length: 0</p>
+<p>Step3 客户端回应<br>客户端收到服务器回应以后，首先验证服务器证书。如果证书不是可信机构颁布、或者证书中的域名与实际域名不一致、或者证书已经过期，就会向访问者显示一个警告，由其选择是否还要继续通信。<br>如果证书没有问题，客户端就会从证书中取出服务器的公钥。然后，向服务器发送下面三项信息：</p>
+<blockquote>
+<p>一个随机数。该随机数用服务器公钥加密，防止被窃听。<br>编码改变通知，表示随后的信息都将用双方商定的加密方法和密钥发送。<br>客户端握手结束通知，表示客户端的握手 阶段已经结束。这一项同时也是前面发送的所有内容的hash值，用来供服务器校验。                                                                                                                                                                                                                                 </p>
+</blockquote>
+<p>上面第一项的随机数，是整个握手阶段出现的第三个随机数，又称”pre-master key”。有了它以后，客户端和服务器就同时有了三个随机数，接着双方就用事先商定的加密方法，各自生成本次会话所用的同一把”会话密钥”。</p>
+<p>至于为什么一定要用三个随机数，来生成”会话密钥”：<br>“不管是客户端还是服务器，都需要随机数，这样生成的密钥才不会每次都一样。由于SSL协议中证书是静态的，因此十分有必要引入一种随机因素来保证协商出来的密钥的随机性。<br>对于RSA密钥交换算法来说，pre-master-key本身就是一个随机数，再加上hello消息中的随机，三个随机数通过一个密钥导出器最终导出一个对称密钥。<br>Pre master的存在在于SSL协议不信任每个主机都能产生完全随机的随机数，如果随机数不随机，那么pre master secret就有可能被猜出来，那么仅适用pre master secret作为密钥就不合适了，因此必须引入新的随机因素，那么客户端和服务器加上pre master secret三个随机数一同生成的密钥就不容易被猜出了，一个伪随机可能完全不随机，可是是三个伪随机就十分接近随机了，每增加一个自由度，随机性增加的可不是一。”<br>此外，如果前一步，服务器要求客户端证书，客户端会在这一步发送证书及相关信息。</p>
+<p>但是在抓取openfire的包中没有看到第三步客户端生成的随机数，不知道原因？<br>客户端回应包内容Client Key Exchange:<br>Secure Sockets Layer<br>    TLSv1.2 Record Layer: Handshake Protocol: Client Key Exchange<br>        Content Type: Handshake (22)<br>        Version: TLS 1.2 (0x0303)<br>        Length: 70<br>        Handshake Protocol: Client Key Exchange<br>            Handshake Type: Client Key Exchange (16)<br>            Length: 66<br>            EC Diffie-Hellman Client Params<br>                Pubkey Length: 65<br>                Pubkey: 0474e65406da33b2d67b72d4df5494432c5a23ffae141960…</p>
+<p>客户端回应包内容：编码改变通知、握手结束通知<br>Secure Sockets Layer<br>    TLSv1.2 Record Layer: Change Cipher Spec Protocol: Change Cipher Spec<br>        Content Type: Change Cipher Spec (20)<br>        Version: TLS 1.2 (0x0303)<br>        Length: 1<br>        Change Cipher Spec Message<br>    TLSv1.2 Record Layer: Handshake Protocol: Encrypted Handshake Message<br>        Content Type: Handshake (22)<br>        Version: TLS 1.2 (0x0303)<br>        Length: 80<br>        Handshake Protocol: Encrypted Handshake Message</p>
+<p>Step4 服务器最终回应<br>服务器收到客户端的第三个随机数pre-master key之后，计算生成本次会话所用的”会话密钥”。然后，向客户端最后发送下面信息。</p>
+<blockquote>
+<p>编码改变通知，表示随后的信息都将用双方商定的加密方法和密钥发送。<br>服务器握手结束通知，表示服务器的握手阶段已经结束。这一项同时也是前面发送的所有内容的hash值，用来供客户端校验。</p>
+</blockquote>
+<p>至此，整个握手阶段全部结束。接下来，客户端与服务器进入加密通信，完全是使用普通的HTTP协议，只不过用”会话密钥”加密内容。</p>
+<p>服务器回应报内容：<br>Secure Sockets Layer<br>    TLSv1.2 Record Layer: Change Cipher Spec Protocol: Change Cipher Spec<br>        Content Type: Change Cipher Spec (20)<br>        Version: TLS 1.2 (0x0303)<br>        Length: 1<br>        Change Cipher Spec Message</p>
+<p>Secure Sockets Layer<br>    TLSv1.2 Record Layer: Handshake Protocol: Encrypted Handshake Message<br>        Content Type: Handshake (22)<br>        Version: TLS 1.2 (0x0303)<br>        Length: 80<br>        Handshake Protocol: Encrypted Handshake Message</p>
+<h2 id="接下来进入SASL协商流程"><a href="#接下来进入SASL协商流程" class="headerlink" title="接下来进入SASL协商流程"></a>接下来进入SASL协商流程</h2><p>Step1：客户端发送给服务器<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">stream:stream</span> <span class="attr">xmlns</span>=<span class="string">'jabber:client'</span> <span class="attr">to</span>=<span class="string">'localhost'</span> <span class="attr">xmlns:stream</span>=<span class="string">'http://etherx.jabber.org/streams'</span> <span class="attr">version</span>=<span class="string">'1.0'</span> <span class="attr">from</span>=<span class="string">'zhangsan@localhost'</span> <span class="attr">xml:lang</span>=<span class="string">'en'</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>Step2：服务器发送给客户端，并带上任何可用的流特性<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version='1.0' encoding='UTF-8'?&gt;<span class="tag">&lt;<span class="name">stream:stream</span> <span class="attr">xmlns:stream</span>=<span class="string">"http://etherx.jabber.org/streams"</span> <span class="attr">xmlns</span>=<span class="string">"jabber:client"</span> <span class="attr">from</span>=<span class="string">"localhost"</span> <span class="attr">id</span>=<span class="string">"45ulb20rwb"</span> <span class="attr">xml:lang</span>=<span class="string">"en"</span> <span class="attr">version</span>=<span class="string">"1.0"</span>&gt;</span><span class="tag">&lt;<span class="name">stream:features</span>&gt;</span><span class="tag">&lt;<span class="name">mechanisms</span> <span class="attr">xmlns</span>=<span class="string">"urn:ietf:params:xml:ns:xmpp-sasl"</span>&gt;</span><span class="tag">&lt;<span class="name">mechanism</span>&gt;</span>PLAIN<span class="tag">&lt;/<span class="name">mechanism</span>&gt;</span><span class="tag">&lt;<span class="name">mechanism</span>&gt;</span>SCRAM-SHA-1<span class="tag">&lt;/<span class="name">mechanism</span>&gt;</span><span class="tag">&lt;<span class="name">mechanism</span>&gt;</span>CRAM-MD5<span class="tag">&lt;/<span class="name">mechanism</span>&gt;</span><span class="tag">&lt;<span class="name">mechanism</span>&gt;</span>DIGEST-MD5<span class="tag">&lt;/<span class="name">mechanism</span>&gt;</span><span class="tag">&lt;/<span class="name">mechanisms</span>&gt;</span><span class="tag">&lt;<span class="name">compression</span> <span class="attr">xmlns</span>=<span class="string">"http://jabber.org/features/compress"</span>&gt;</span><span class="tag">&lt;<span class="name">method</span>&gt;</span>zlib<span class="tag">&lt;/<span class="name">method</span>&gt;</span><span class="tag">&lt;/<span class="name">compression</span>&gt;</span><span class="tag">&lt;<span class="name">ver</span> <span class="attr">xmlns</span>=<span class="string">"urn:xmpp:features:rosterver"</span>/&gt;</span><span class="tag">&lt;<span class="name">register</span> <span class="attr">xmlns</span>=<span class="string">"http://jabber.org/features/iq-register"</span>/&gt;</span><span class="tag">&lt;/<span class="name">stream:features</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>Step3：客户端发送给服务器，客户端选择一个验证机制<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">auth</span> <span class="attr">xmlns</span>=<span class="string">'urn:ietf:params:xml:ns:xmpp-sasl'</span> <span class="attr">mechanism</span>=<span class="string">'SCRAM-SHA-1'</span>&gt;</span>biwsbj16aGFuZ3NhbixyPSNhTTRWeHdjO2ZzckZ2M3tuXnxHMVlTWWwzQEdCI1Va<span class="tag">&lt;/<span class="name">auth</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>Step4：服务器发送给客户端，服务器发送挑战<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">challenge</span> <span class="attr">xmlns</span>=<span class="string">"urn:ietf:params:xml:ns:xmpp-sasl"</span>&gt;</span>cj0jYU00Vnh3Yztmc3JGdjN7bl58RzFZU1lsM0BHQiNVWjA3MzAzYzgwLWM2YTctNGRjMC1iZmUyLWVjODNlYmJmY2FlMCxzPVdmckVRTXVmZVdCSmoxS0dUR0p5aVJuaGIrWVJFQzZKLGk9NDA5Ng==<span class="tag">&lt;/<span class="name">challenge</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>Step5：客户端发送给服务器，发送一个应答<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">response</span> <span class="attr">xmlns</span>=<span class="string">'urn:ietf:params:xml:ns:xmpp-sasl'</span>&gt;</span>Yz1iaXdzLHI9I2FNNFZ4d2M7ZnNyRnYze25efEcxWVNZbDNAR0IjVVowNzMwM2M4MC1jNmE3LTRkYzAtYmZlMi1lYzgzZWJiZmNhZTAscD1QdUE5OGVSVXBBSGhqa2EwdDJ3dVQ1TFBvU1k9<span class="tag">&lt;/<span class="name">response</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>Step6：服务器发送给客户端，通知客户端成功了<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">success</span> <span class="attr">xmlns</span>=<span class="string">"urn:ietf:params:xml:ns:xmpp-sasl"</span>&gt;</span>dj1WZUtxOFFTRFBTbXdaNUM2V1hvanZTTzJwdTA9<span class="tag">&lt;/<span class="name">success</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>Step7：客户端发送给服务器，初始化一个新的流到服务器<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">stream:stream</span> <span class="attr">xmlns</span>=<span class="string">'jabber:client'</span> <span class="attr">to</span>=<span class="string">'localhost'</span> <span class="attr">xmlns:stream</span>=<span class="string">'http://etherx.jabber.org/streams'</span> <span class="attr">version</span>=<span class="string">'1.0'</span> <span class="attr">from</span>=<span class="string">'zhangsan@localhost'</span> <span class="attr">id</span>=<span class="string">'45ulb20rwb'</span> <span class="attr">xml:lang</span>=<span class="string">'en'</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>Step8：服务器发送一个流到客户端，并带上支持的特性，特性中没有SASL的部分了，因为SASL握手成功<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version='1.0' encoding='UTF-8'?&gt;<span class="tag">&lt;<span class="name">stream:stream</span> <span class="attr">xmlns:stream</span>=<span class="string">"http://etherx.jabber.org/streams"</span> <span class="attr">xmlns</span>=<span class="string">"jabber:client"</span> <span class="attr">from</span>=<span class="string">"localhost"</span> <span class="attr">id</span>=<span class="string">"45ulb20rwb"</span> <span class="attr">xml:lang</span>=<span class="string">"en"</span> <span class="attr">version</span>=<span class="string">"1.0"</span>&gt;</span><span class="tag">&lt;<span class="name">stream:features</span>&gt;</span><span class="tag">&lt;<span class="name">compression</span> <span class="attr">xmlns</span>=<span class="string">"http://jabber.org/features/compress"</span>&gt;</span><span class="tag">&lt;<span class="name">method</span>&gt;</span>zlib<span class="tag">&lt;/<span class="name">method</span>&gt;</span><span class="tag">&lt;/<span class="name">compression</span>&gt;</span><span class="tag">&lt;<span class="name">ver</span> <span class="attr">xmlns</span>=<span class="string">"urn:xmpp:features:rosterver"</span>/&gt;</span><span class="tag">&lt;<span class="name">bind</span> <span class="attr">xmlns</span>=<span class="string">"urn:ietf:params:xml:ns:xmpp-bind"</span>/&gt;</span><span class="tag">&lt;<span class="name">session</span> <span class="attr">xmlns</span>=<span class="string">"urn:ietf:params:xml:ns:xmpp-session"</span>&gt;</span><span class="tag">&lt;<span class="name">optional</span>/&gt;</span><span class="tag">&lt;/<span class="name">session</span>&gt;</span><span class="tag">&lt;<span class="name">sm</span> <span class="attr">xmlns</span>=<span class="string">'urn:xmpp:sm:2'</span>/&gt;</span><span class="tag">&lt;<span class="name">sm</span> <span class="attr">xmlns</span>=<span class="string">'urn:xmpp:sm:3'</span>/&gt;</span><span class="tag">&lt;/<span class="name">stream:features</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="接下来进入资源绑定、加载好友列表等流程"><a href="#接下来进入资源绑定、加载好友列表等流程" class="headerlink" title="接下来进入资源绑定、加载好友列表等流程"></a>接下来进入资源绑定、加载好友列表等流程</h2><p>Step1: 客户端发送给服务器，请求资源绑定<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">iq</span> <span class="attr">id</span>=<span class="string">'tM183-3'</span> <span class="attr">type</span>=<span class="string">'set'</span>&gt;</span><span class="tag">&lt;<span class="name">bind</span> <span class="attr">xmlns</span>=<span class="string">'urn:ietf:params:xml:ns:xmpp-bind'</span>&gt;</span><span class="tag">&lt;<span class="name">resource</span>&gt;</span>Spark<span class="tag">&lt;/<span class="name">resource</span>&gt;</span><span class="tag">&lt;/<span class="name">bind</span>&gt;</span><span class="tag">&lt;/<span class="name">iq</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>Step2: 服务器接受提交的资源部分并通知客户端资源绑定成功<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">iq</span> <span class="attr">type</span>=<span class="string">"result"</span> <span class="attr">id</span>=<span class="string">"tM183-3"</span> <span class="attr">to</span>=<span class="string">"localhost/45ulb20rwb"</span>&gt;</span><span class="tag">&lt;<span class="name">bind</span> <span class="attr">xmlns</span>=<span class="string">"urn:ietf:params:xml:ns:xmpp-bind"</span>&gt;</span><span class="tag">&lt;<span class="name">jid</span>&gt;</span>zhangsan@localhost/Spark<span class="tag">&lt;/<span class="name">jid</span>&gt;</span><span class="tag">&lt;/<span class="name">bind</span>&gt;</span><span class="tag">&lt;/<span class="name">iq</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>Step3: 客户端会向服务器加载好友列表<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">iq</span> <span class="attr">id</span>=<span class="string">'fKWr5-5'</span> <span class="attr">type</span>=<span class="string">'get'</span>&gt;</span><span class="tag">&lt;<span class="name">query</span> <span class="attr">xmlns</span>=<span class="string">'jabber:iq:roster'</span>&gt;</span><span class="tag">&lt;/<span class="name">query</span>&gt;</span><span class="tag">&lt;/<span class="name">iq</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>Step4: 服务器会查询ofRoster和ofRosterGroups表，找出用户的好友及其所在分组，然后响应客户端<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">iq</span> <span class="attr">type</span>=<span class="string">"result"</span> <span class="attr">id</span>=<span class="string">"fKWr5-5"</span> <span class="attr">to</span>=<span class="string">"zhangsan@localhost/Spark"</span>&gt;</span><span class="tag">&lt;<span class="name">query</span> <span class="attr">xmlns</span>=<span class="string">"jabber:iq:roster"</span> <span class="attr">ver</span>=<span class="string">"1379436822"</span>&gt;</span><span class="tag">&lt;<span class="name">item</span> <span class="attr">jid</span>=<span class="string">"wangwu@localhost"</span> <span class="attr">name</span>=<span class="string">"wangwu"</span> <span class="attr">subscription</span>=<span class="string">"both"</span>&gt;</span><span class="tag">&lt;<span class="name">group</span>&gt;</span>Friends<span class="tag">&lt;/<span class="name">group</span>&gt;</span><span class="tag">&lt;/<span class="name">item</span>&gt;</span><span class="tag">&lt;<span class="name">item</span> <span class="attr">jid</span>=<span class="string">"lisi@localhost"</span> <span class="attr">name</span>=<span class="string">"lisi"</span> <span class="attr">subscription</span>=<span class="string">"both"</span>&gt;</span><span class="tag">&lt;<span class="name">group</span>&gt;</span>Friends<span class="tag">&lt;/<span class="name">group</span>&gt;</span><span class="tag">&lt;/<span class="name">item</span>&gt;</span><span class="tag">&lt;/<span class="name">query</span>&gt;</span><span class="tag">&lt;/<span class="name">iq</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>补充说明1: 之后便可以进行消息发送，例如用户A发给用户B ，为维持TCP连接，客户端会每隔3分钟（例如spark客户端，已实际测试）向服务器发送心跳包，包内容如下：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">iq</span> <span class="attr">to</span>=<span class="string">'localhost'</span> <span class="attr">id</span>=<span class="string">'945-249'</span> <span class="attr">type</span>=<span class="string">'result'</span>&gt;</span><span class="tag">&lt;/<span class="name">iq</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>服务器会响应客户端，成功情况：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">iq</span> <span class="attr">type</span>=<span class="string">"get"</span> <span class="attr">id</span>=<span class="string">"945-249"</span> <span class="attr">from</span>=<span class="string">"localhost"</span> <span class="attr">to</span>=<span class="string">"zhangsan@localhost/Spark"</span>&gt;</span><span class="tag">&lt;<span class="name">ping</span> <span class="attr">xmlns</span>=<span class="string">"urn:xmpp:ping"</span>/&gt;</span><span class="tag">&lt;/<span class="name">iq</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>失败情况，之后客户端会重新连接，重连时间随重连次数不断增加：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">stream:error</span>&gt;</span><span class="tag">&lt;<span class="name">system-shutdown</span> <span class="attr">xmlns</span>=<span class="string">'urn:ietf:params:xml:ns:xmpp-streams'</span>/&gt;</span><span class="tag">&lt;/<span class="name">stream:error</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>补充说明2: 用户在线状态改变时会向该用户的好友发送presence包，告知好友们我的状态。<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">presence</span> <span class="attr">to</span>=<span class="string">"zhangsan@localhost"</span> <span class="attr">from</span>=<span class="string">"lisi@localhost/Spark"</span> <span class="attr">id</span>=<span class="string">"qxrG4-10"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">status</span>&gt;</span>在线<span class="tag">&lt;/<span class="name">status</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">priority</span>&gt;</span>1<span class="tag">&lt;/<span class="name">priority</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">c</span> <span class="attr">xmlns</span>=<span class="string">"http://jabber.org/protocol/caps"</span> <span class="attr">hash</span>=<span class="string">"sha-1"</span> <span class="attr">node</span>=<span class="string">"http://www.igniterealtime.org/projects/smack"</span> <span class="attr">ver</span>=<span class="string">"TJuVIXqTCVfJSthaPu4MtTbaf9A="</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">presence</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">presence</span> <span class="attr">to</span>=<span class="string">"zhangsan@localhost"</span> <span class="attr">from</span>=<span class="string">"lisi@localhost/Spark"</span> <span class="attr">id</span>=<span class="string">"qxrG4-296"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">status</span>&gt;</span>离开<span class="tag">&lt;/<span class="name">status</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">priority</span>&gt;</span>0<span class="tag">&lt;/<span class="name">priority</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">show</span>&gt;</span>away<span class="tag">&lt;/<span class="name">show</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">c</span> <span class="attr">xmlns</span>=<span class="string">"http://jabber.org/protocol/caps"</span> <span class="attr">hash</span>=<span class="string">"sha-1"</span> <span class="attr">node</span>=<span class="string">"http://www.igniterealtime.org/projects/smack"</span> <span class="attr">ver</span>=<span class="string">"TJuVIXqTCVfJSthaPu4MtTbaf9A="</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">presence</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>服务器断开后<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">presence</span> <span class="attr">to</span>=<span class="string">"zhangsan@localhost"</span> <span class="attr">from</span>=<span class="string">"lisi@localhost/Spark"</span> <span class="attr">id</span>=<span class="string">"qxrG4-301"</span> <span class="attr">type</span>=<span class="string">"unavailable"</span>/&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>补充说明3：离线消息<br>openfire服务器的用户离线消息是放在mysql数据库中：ofOffline表，离线用户会记录在ofOffline表中。</p>
+<hr>
+<p>如有错误，务必指出，十分感谢。</p>
+<p>作者 ：程序猿QQ<br>2018年 06月 16日    </p>
+<hr>
+<h2 id="日常歌曲推荐"><a href="#日常歌曲推荐" class="headerlink" title="日常歌曲推荐"></a>日常歌曲推荐</h2><blockquote>
+<p>secret base ~君がくれたもの~ (10 years after Ver.)</p>
+</blockquote>
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="//music.163.com/outchain/player?type=2&id=33911781&auto=0&height=66"></iframe>
+
+      
+    </div>
+    
+    
+    
+
+	<div>
+      
+      <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+      
+    </div>
+	
+	<div>
+      
+        
+<div class="my_post_copyright">
+  <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+
+  <!-- JS库 sweetalert 可修改路径 -->
+  <script src="https://cdn.bootcss.com/jquery/2.0.0/jquery.min.js"></script>
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  <!--<p><span>本文标题:</span><a href="/2018/06/16/XMPPTLS/">XMPP协议网络抓包分析-以openfire服务器为例</a></p>-->
+  <p><span>文章作者:</span><a href="/" title="访问 程序猿QQ 的个人博客">程序猿QQ</a></p>
+  <!--<p><span>发布时间:</span>2018年06月16日 - 08:06</p>
+  <p><span>最后更新:</span>2018年07月31日 - 00:07</p>-->
+  <p><span>原始链接:</span><a href="/2018/06/16/XMPPTLS/" title="XMPP协议网络抓包分析-以openfire服务器为例">https://www.wacj.top/2018/06/16/XMPPTLS/</a>
+    <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="https://www.wacj.top/2018/06/16/XMPPTLS/"  aria-label="复制成功！"></i></span>
+  </p>
+  <p><span>许可协议:</span>本博客所有文章除特别声明外，均采用 <i class="fa fa-creative-commons"></i><a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">CC BY-NC-SA 4.0</a>许可协议，转载请保留原文链接及作者。</p>  
+</div>
+<script> 
+    var clipboard = new Clipboard('.fa-clipboard');
+      $(".fa-clipboard").click(function(){
+      clipboard.on('success', function(){
+        swal({   
+          title: "",   
+          text: '复制成功',
+          icon: "success", 
+          showConfirmButton: true
+          });
+        });
+    });  
+</script>
+
+      
+    </div>
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="程序猿QQ 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/XMPP/" rel="tag"><i class="fa fa-tag"></i> XMPP</a>
+          
+            <a href="/tags/TLS/" rel="tag"><i class="fa fa-tag"></i> TLS</a>
+          
+        </div>
+      
+
+      
+      
+        <div class="post-widgets">
+        
+
+        
+
+        
+          
+          <div id="needsharebutton-postbottom">
+            <span class="btn">
+              <i class="fa fa-share-alt" aria-hidden="true"></i>
+            </span>
+          </div>
+        
+        </div>
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/06/20/XMPPSASL/" rel="prev" title="XMPP协议SASL认证流程">
+                <i class="fa fa-chevron-left"></i> XMPP协议SASL认证流程
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/05/26/zhihu-pachong/" rel="next" title="30万知乎用户数据爬虫分析">
+                30万知乎用户数据爬虫分析 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8zNjczNy8xMzI3Mg"></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+      <div id="sidebar-dimmer"></div>
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/user2.jpeg"
+                alt="程序猿QQ" />
+            
+              <p class="site-author-name" itemprop="name">程序猿QQ</p>
+              <p class="site-description motion-element" itemprop="description">临渊羡鱼，不如退而结网</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/WU-hrq" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:whu-hrq@whu.edu.cn" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                友情链接
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://music.163.com/#/user/home?id=478480173" title="网易云音乐" target="_blank" rel="external nofollow">网易云音乐</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.36zhen.com/t?id=3448" title="前端书籍资料" target="_blank" rel="external nofollow">前端书籍资料</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.java1234.com/" title="Java学习资料" target="_blank" rel="external nofollow">Java学习资料</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#XMPP登录流程"><span class="nav-number">1.</span> <span class="nav-text">XMPP登录流程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#下面开始TLS握手阶段，”握手阶段”涉及四次通信："><span class="nav-number">2.</span> <span class="nav-text">下面开始TLS握手阶段，”握手阶段”涉及四次通信：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#接下来进入SASL协商流程"><span class="nav-number">3.</span> <span class="nav-text">接下来进入SASL协商流程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#接下来进入资源绑定、加载好友列表等流程"><span class="nav-number">4.</span> <span class="nav-text">接下来进入资源绑定、加载好友列表等流程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#日常歌曲推荐"><span class="nav-number">5.</span> <span class="nav-text">日常歌曲推荐</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2017 &mdash; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love" id="heart">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">程序猿QQ</span>
+
+  
+</div>
+
+
+<!--
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io" rel="external nofollow">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next" rel="external nofollow">NexT.Mist</a> v5.1.4</div>
+
+-->
+
+
+<!--
+<div class="theme-info">
+  <div class="powered-by"></div>
+  <span class="post-count">博客全站共8.3k字</span>
+</div>
+-->
+
+<div class="weixin-box">
+  <div class="weixin-menu">
+    <div class="weixin-hover">
+      <div class="weixin-description">微信扫一扫，订阅本博客</div>
+    </div>
+  </div>
+</div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"> 访问人数</i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"> 总访问量</i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/needsharebutton/needsharebutton.css">
+
+  
+  
+  <script src="/lib/needsharebutton/needsharebutton.js"></script>
+
+  <script>
+    
+      pbOptions = {};
+      
+          pbOptions.iconStyle = "default";
+      
+          pbOptions.boxForm = "horizontal";
+      
+          pbOptions.position = "bottomCenter";
+      
+          pbOptions.networks = "Weibo,Wechat,Douban,QQZone,Twitter,Facebook";
+      
+      new needShareButton('#needsharebutton-postbottom', pbOptions);
+    
+    
+  </script>
+
+  
+
+  
+
+  
+
+  
+
+  
+  <!-- 页面点击小红心 -->
+  <script type="text/javascript" src="/js/src/love.js"></script>
+  <script>
+  (function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+  })();
+  </script>
+</body>
+</html>
